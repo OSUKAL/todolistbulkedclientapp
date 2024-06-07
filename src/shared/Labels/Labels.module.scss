@@ -1,0 +1,25 @@
+﻿.labels {
+  display: flex;
+  flex-wrap: wrap;
+  
+  gap: .5rem;
+
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  list-style-type: none;
+
+  .item {
+    padding: .1rem 2rem;
+
+    border-radius: 1.7rem;
+    border: 1px grey solid;
+
+    color: darkslategrey;
+    background: lightgreen;
+
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+﻿.button{
+  padding: .7rem 3.2rem;
+  
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: inherit;
+
+  color: white;
+  background: rgb(100, 108, 255);
+  border-radius: 1rem;
+
+  transition: border .1s linear, background-color .1s linear;
+  
+  &:hover{
+    background: rgb(77, 84, 197);
+  }
+  
+  &:active{
+    background: rgb(51, 56, 133);
+  }
+}

@@ -1,0 +1,43 @@
+﻿.info{
+  display: flex;
+  flex-direction: column;
+  
+  .header{
+    margin-bottom: 3rem;
+
+    .creation {
+      display: flex;
+
+      font-size: 1.7rem;
+
+      .item {
+        display: flex;
+        margin-right: 4rem;
+        
+        .text{
+          margin-right: 1rem;
+        }
+
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+
+    .title{
+      margin-bottom: 1rem;
+      
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
+  
+  .description{
+    margin-bottom: 3rem;
+    font-size: 2.2rem;
+  }
+  
+  .edit{
+    width: 50rem;
+  }
+}

@@ -1,0 +1,50 @@
+﻿.base{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2rem;
+  
+  margin: 0 1.5rem;
+  
+  .header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 .5rem;
+    
+    .title{
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
+  
+  .search{
+    display: flex;
+    margin: 0 .5rem;
+    
+    .item{
+      flex: 1 1 20%;
+      margin-right: 2rem;
+    }
+  }
+  
+  .scroll{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    
+    height: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
+
+    border-top: 2px rgb(100, 108, 255) solid;
+    border-bottom: 2px rgb(100, 108, 255) solid;
+
+    gap: 1rem;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+}

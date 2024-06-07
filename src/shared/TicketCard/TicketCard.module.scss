@@ -1,0 +1,44 @@
+﻿.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 32rem;
+  
+  font-size: 1.5rem;
+  
+  padding: 1rem;
+  
+  border-radius: 1rem;
+  border: 1px  rgb(100, 108, 255) solid;
+  
+  background: rgb(243, 243, 243);
+  
+  .header{
+    margin-bottom: 1rem;
+    
+    .number{
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      line-height: 1.2;
+    }
+    
+    .title{
+      margin-bottom: 1rem;
+      
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+  }
+  
+  .performer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .text{
+      margin-left: 1rem;
+      font-weight: bold;
+    }
+  }
+}

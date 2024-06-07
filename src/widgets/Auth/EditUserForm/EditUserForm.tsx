@@ -36,7 +36,7 @@ export const EditUserForm = memo<Props>(({
                 onChange={handleRoleSelect}
                 placeholder={data.role}
             />
-            <Button title={'Подтвердить'}/>
+            <Button onClick={()=>{}} title={'Подтвердить'}/>
         </FormBase>
     )
 })

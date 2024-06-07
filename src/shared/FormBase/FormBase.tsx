@@ -1,4 +1,4 @@
-﻿import { memo, PropsWithChildren } from 'react'
+﻿import React, { memo, PropsWithChildren } from 'react'
 import styles from './FormBase.module.scss'
 import classNames from 'classnames'
 
@@ -13,9 +13,15 @@ export const FormBase = memo<PropsWithChildren<Props>>(({
     children
 }) => {
     const modalStyles = classNames(styles.form, styles.edit)
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation()
+    }
     
     return(
-        <div className={isInModal ? modalStyles : styles.form}>
+        <div
+            onClick={handleClick}
+            className={isInModal ? modalStyles : styles.form}
+        >
             <h2 className={styles.header}>{title}</h2>
             {children}
         </div>

@@ -3,7 +3,7 @@
   flex-direction: column;
   
   .header{
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 
     .creation {
       display: flex;
@@ -16,6 +16,8 @@
         
         .text{
           margin-right: 1rem;
+          
+          font-weight: bold;
         }
 
         &:last-child{
@@ -33,7 +35,7 @@
   }
   
   .description{
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     font-size: 2.2rem;
   }
   

@@ -8,6 +8,7 @@ import { LoginForm } from '../../widgets/Auth/LoginForm/LoginForm.tsx'
 import { EditUserForm } from '../../widgets/Auth/EditUserForm/EditUserForm.tsx'
 import { UserModel } from '../../models/User/UserModel.ts'
 
+
 export const AuthPage = memo(() => {
     const user: UserModel = {
         id: '1',

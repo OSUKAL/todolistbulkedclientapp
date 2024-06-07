@@ -12,8 +12,6 @@
   transition: border .1s linear;
   cursor: pointer;
   
-  overflow: hidden;
-  
   position: relative;
   
   .arrow{
@@ -43,7 +41,22 @@
   }
   
   .options{
+    display: block;
+
+    background: whitesmoke;
+    border: 2px rgb(77, 84, 197) solid;
+    
+    border-radius: 1rem;
+
     list-style-type: none;
+    
+    overflow: hidden;
+    
+    position: absolute;
+    top: 110%;
+    left: -0.2rem;
+    right: -0.2rem;
+    z-index: 10;
   }
   
   &:hover, {

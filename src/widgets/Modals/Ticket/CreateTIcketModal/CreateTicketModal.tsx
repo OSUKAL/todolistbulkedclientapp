@@ -10,7 +10,7 @@ export const CreateTicketModal = memo<Props>(({
     onClick
 }) => {
     return (
-        <ModalBase>
+        <ModalBase close={onClick}>
             <CreateTicketForm
                 onClick={onClick}
             />

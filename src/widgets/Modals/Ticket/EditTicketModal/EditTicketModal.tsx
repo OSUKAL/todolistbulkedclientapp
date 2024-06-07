@@ -13,7 +13,7 @@ export const EditTicketModal = memo<Props>(({
     onClick
 }) => {
     return (
-        <ModalBase>
+        <ModalBase close={onClick}>
             <EditTicketForm 
                 onClick={onClick} 
                 priority={data.priority} 

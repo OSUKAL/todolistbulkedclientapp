@@ -30,15 +30,9 @@ export const TicketList = memo<Props>(({
             </div>
             <div className={styles.search}>
                 <div className={styles.item}>
-                    <Input placeholder={'Поиск по создателю'} type={''}/>
+                    <Input placeholder={'Поиск по создателю, исполнителю, задаче'} type={''}/>
                 </div>
-                <div className={styles.item}>
-                    <Input placeholder={'Поиск по исполнителю'} type={''}/>
-                </div>
-                <div className={styles.item}>
-                    <Input placeholder={'Поиск по задаче'} type={''}/>
-                </div>
-                <Button title={'Все задачи'}/>
+                <Button onClick={() => {}} title={'Сброс'}/>
             </div>
             <div className={styles.scroll}>
                 {data.map((item) => (
@@ -55,6 +49,5 @@ export const TicketList = memo<Props>(({
                 />
             )}
         </div>
-
     )
 })

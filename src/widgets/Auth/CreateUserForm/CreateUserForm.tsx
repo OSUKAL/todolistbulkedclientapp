@@ -31,7 +31,7 @@ export const CreateUserForm = memo(() => {
                 onChange={handleRoleSelect}
                 placeholder={'Выберите роль'}
             />
-            <Button title={'Создать'}/>
+            <Button onClick={()=>{}} title={'Создать'}/>
         </FormBase>
     )
 })

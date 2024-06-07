@@ -1,11 +1,20 @@
 ﻿import { memo, PropsWithChildren } from 'react'
 import styles from './ModalBase.module.scss'
 
-export const ModalBase = memo<PropsWithChildren>(({
-    children
+type Props = {
+    close: () => void
+}
+
+export const ModalBase = memo<PropsWithChildren<Props>>(({
+    children,
+    close
 }) => {
+    
     return (
-        <div className={styles.base}>
+        <div
+            onClick={close}
+            className={styles.base}
+        >
             {children}
         </div>
     )

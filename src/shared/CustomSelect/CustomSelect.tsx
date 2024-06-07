@@ -9,7 +9,6 @@ type Props = {
     mode?: 'rows' | 'cells'
     status?: 'default' | 'invalid'
     onChange?: (selected: Option['value']) => void
-    onClose?: () => void
 }
 
 export const Select = memo<Props>(({
@@ -19,7 +18,6 @@ export const Select = memo<Props>(({
     mode = 'rows',
     status = 'default',
     onChange,
-    onClose
 }) => {
     const [isOpen, setIsOpen] = useState(false)
     const rootRef = useRef<HTMLDivElement>(null)
@@ -29,7 +27,6 @@ export const Select = memo<Props>(({
         const handleClick = (event: MouseEvent) => {
             const { target } = event
             if (target instanceof Node && !rootRef.current?.contains(target)) {
-                isOpen && onClose?.()
                 setIsOpen(false)
             }
         }
@@ -39,7 +36,7 @@ export const Select = memo<Props>(({
         return () => {
             window.removeEventListener('click', handleClick)
         }
-    }, [isOpen, onClose])
+    }, [isOpen])
     
     const handleOptionClick = (value: Option['value']) => {
         setIsOpen(false)
@@ -55,7 +52,6 @@ export const Select = memo<Props>(({
             ref={rootRef}
             data-is-active={isOpen}
             data-mode={mode}
-            tabIndex={0}
         >
             <div className={styles.arrow}></div>
 

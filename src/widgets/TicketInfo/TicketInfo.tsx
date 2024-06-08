@@ -1,21 +1,26 @@
 ﻿import { memo, useState } from 'react'
 import styles from './TicketInfo.module.scss'
-import { TicketModel } from '../../models/Ticket/TicketModel.ts'
+import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 import { Button } from '../../shared/CustomButton/CustomButton.tsx'
 import {EditTicketModal} from '../Modals/Ticket/EditTicketModal/EditTicketModal.tsx'
 import { Labels } from '../../shared/Labels/Labels.tsx'
 
 type Props = {
+    /**Данные задачи*/
     data: TicketModel
 }
 
 // Редюсеры для приоритета, статуса и типа задачи
 
+/**
+ * Информация о задаче
+ */
 export const TicketInfo = memo<Props>(({
     data
 }) => {
     const[isModalOpen, setModalOpen] = useState(false)
-    
+
+    /**Обработка состояния модального окна*/
     const handleModalToggle = () => {
         setModalOpen((prev) => !prev)
     }
@@ -28,12 +33,12 @@ export const TicketInfo = memo<Props>(({
                     <div className={styles.item}>{data.date.toLocaleDateString()}</div>
                     <div className={styles.item}>
                         <div className={styles.text}>Задачу добавил</div>
-                        {data.creator}
+                        {data.creator.username}
                     </div>
-                    {data.performer != '' && (
+                    {data.performer.username !== '' && (
                         <div className={styles.item}>
                             <div className={styles.text}>Выполняет</div>
-                            {data.performer}
+                            {data.performer.username}
                         </div>
                     )}
                 </div>

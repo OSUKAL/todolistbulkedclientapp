@@ -3,8 +3,13 @@ import styles from './BasePage.module.scss'
 import { Header } from '../../widgets/Header/Header.tsx'
 
 type Props = {
+    /**Видимость шапки экрана*/
     showHeader?: boolean
 }
+
+/**
+ * Базовый экран
+ */
 export const BasePage = memo<PropsWithChildren<Props>>(({
     children,
     showHeader = true

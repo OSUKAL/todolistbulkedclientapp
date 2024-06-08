@@ -12,6 +12,9 @@ const roles = [
     {title: 'Аналитик', value: '5'}
 ]
 
+/**
+ * Форма создания пользователя
+ */
 export const CreateUserForm = memo(() => {
     const [role, setRole] = useState('')
     const handleRoleSelect = (value: string) => {
@@ -28,7 +31,7 @@ export const CreateUserForm = memo(() => {
             <Select
                 option={selectedRole || null} 
                 options={roles}
-                onChange={handleRoleSelect}
+                onClick={handleRoleSelect}
                 placeholder={'Выберите роль'}
             />
             <Button onClick={()=>{}} title={'Создать'}/>

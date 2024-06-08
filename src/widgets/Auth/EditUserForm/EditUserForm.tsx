@@ -3,7 +3,7 @@ import { Select } from '../../../shared/CustomSelect/CustomSelect.tsx'
 import { Input } from '../../../shared/CustomInput/CustomInput.tsx'
 import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
 import { FormBase } from '../../../shared/FormBase/FormBase.tsx'
-import { UserModel } from '../../../models/User/UserModel.ts'
+import type { UserModel } from '../../../models/User/UserModel.ts'
 
 const roles = [
     {title: 'Администратор', value: '1'},
@@ -14,9 +14,13 @@ const roles = [
 ]
 
 type Props = {
+    /**Данные пользователя*/
     data: UserModel
 }
 
+/**
+ * Форма изменения пользователя
+ */
 export const EditUserForm = memo<Props>(({
     data
 }) => {
@@ -33,8 +37,8 @@ export const EditUserForm = memo<Props>(({
             <Select
                 option={selectedRole || null}
                 options={roles}
-                onChange={handleRoleSelect}
-                placeholder={data.role}
+                onClick={handleRoleSelect}
+                placeholder={data.role.toString()}
             />
             <Button onClick={()=>{}} title={'Подтвердить'}/>
         </FormBase>

@@ -5,6 +5,7 @@ import { Select } from '../../../shared/CustomSelect/CustomSelect.tsx'
 import styles from '../TicketForm.module.scss'
 import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
 import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
+import type { TicketModel } from '../../../models/Ticket/TicketModel.ts'
 
 const priorities = [
     { title: 'Наивысший', value: '1' },
@@ -29,21 +30,22 @@ const types = [
 ]
 
 type Props = {
+    /**Обработка нажатия*/
     onClick: () => void
-    priority: string //enum
-    state: string //enum
-    type: string //enum
+    /**Данные задачи*/
+    data: TicketModel
 }
 
+/**
+ * Форма редактирования задачи
+ */
 export const EditTicketForm = memo<Props>(({
-    type,
-    state,
-    priority,
+    data,
     onClick
 }) => {
-    const [p, setPriority] = useState('')
-    const [s, setState] = useState('')
-    const [t, setType] = useState('')
+    const [priority, setPriority] = useState('')
+    const [state, setState] = useState('')
+    const [type, setType] = useState('')
 
     const handlePrioritySelect = useCallback((value: string) => {
         setPriority(value)
@@ -55,9 +57,9 @@ export const EditTicketForm = memo<Props>(({
         setType(value)
     }, [])
 
-    const selectedPriority = priorities.find((item) => item.value === p)
-    const selectedState = states.find((item) => item.value === s)
-    const selectedType = types.find((item) => item.value === t)
+    const selectedPriority = priorities.find((item) => item.value === priority)
+    const selectedState = states.find((item) => item.value === state)
+    const selectedType = types.find((item) => item.value === type)
 
     return (
         <FormBase isInModal={true} title={'Редактирование задачи'}>
@@ -70,20 +72,20 @@ export const EditTicketForm = memo<Props>(({
                     <Select
                         option={selectedState || null}
                         options={states}
-                        onChange={handleStateSelect}
-                        placeholder={state}
+                        onClick={handleStateSelect}
+                        placeholder={data.state.toString()}
                     />
                     <Select
                         option={selectedType || null}
                         options={types}
-                        onChange={handleTypeSelect}
-                        placeholder={type}
+                        onClick={handleTypeSelect}
+                        placeholder={data.type.toString()}
                     />
                     <Select
                         option={selectedPriority || null}
                         options={priorities}
-                        onChange={handlePrioritySelect}
-                        placeholder={priority}
+                        onClick={handlePrioritySelect}
+                        placeholder={data.priority.toString()}
                     />
                     <Button
                         onClick={onClick}

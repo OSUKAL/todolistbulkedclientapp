@@ -1,12 +1,16 @@
 ﻿import { memo } from 'react'
 import styles from './TicketCard.module.scss'
 import { Labels } from '../Labels/Labels.tsx'
-import { TicketModel } from '../../models/Ticket/TicketModel.ts'
+import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 
 type Props = {
+    /**Данные задачи*/
     data: TicketModel
 }
 
+/**
+ * Карточка задачи
+ */
 export const TicketCard = memo<Props>(({
     data
 }) => {
@@ -18,10 +22,10 @@ export const TicketCard = memo<Props>(({
                 <Labels data={data}/>
             </div>
 
-            {data.performer != '' && (
+            {data.performer.username !== '' && (
                 <div className={styles.performer}>
                     Выполняет
-                    <div className={styles.text}>{data.performer}</div>
+                    <div className={styles.text}>{data.performer.username}</div>
                 </div>
             )}
         </div>

@@ -3,9 +3,13 @@ import styles from './Header.module.scss'
 import { Container } from '../../shared/Container/Container.tsx'
 
 type Props = {
+    /**Статус авторизации*/
     isLoggedIn: boolean
 }
 
+/**
+ * Шапка экрана
+ */
 export const Header = memo<Props>(({
     isLoggedIn = false
 }) => {

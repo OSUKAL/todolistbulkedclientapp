@@ -3,21 +3,24 @@ import styles from './CustomSelect.module.scss'
 import { Option } from './SelectOption/SelectOption.tsx'
 
 type Props = {
+    /**Выбранный вариант*/
     option: Option | null
+    /**Варианты выбора*/
     options: Option[]
+    /**Заполнитель*/
     placeholder?: string
-    mode?: 'rows' | 'cells'
-    status?: 'default' | 'invalid'
-    onChange?: (selected: Option['value']) => void
+    /**Обработка нажатия*/
+    onClick?: (selected: Option['value']) => void
 }
 
+/**
+ * Выпадающий список
+ */
 export const Select = memo<Props>(({
     option,
     options,
     placeholder,
-    mode = 'rows',
-    status = 'default',
-    onChange,
+    onClick,
 }) => {
     const [isOpen, setIsOpen] = useState(false)
     const rootRef = useRef<HTMLDivElement>(null)
@@ -37,11 +40,14 @@ export const Select = memo<Props>(({
             window.removeEventListener('click', handleClick)
         }
     }, [isOpen])
-    
+
+    /**Обработка выбора варианта из выпадающего списка*/
     const handleOptionClick = (value: Option['value']) => {
         setIsOpen(false)
-        onChange?.(value)
+        onClick?.(value)
     }
+
+    /**Обработка открытия списка вариантов*/
     const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
         setIsOpen((prev) => !prev)
     }
@@ -50,19 +56,14 @@ export const Select = memo<Props>(({
         <div
             className={styles.select}
             ref={rootRef}
-            data-is-active={isOpen}
-            data-mode={mode}
         >
             <div className={styles.arrow}></div>
 
             <div
                 className={styles.placeholder}
                 ref={placeholderRef}
-                data-status={status}
-                data-selected={!!option?.value}
                 onClick={handlePlaceHolderClick}
                 role={'button'}
-                tabIndex={0}
             >
                 {option?.title || placeholder}
             </div>

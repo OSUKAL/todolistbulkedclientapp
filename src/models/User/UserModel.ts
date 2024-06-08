@@ -1,6 +1,13 @@
-﻿export type UserModel = {
+﻿import { UserRole } from '../../Enums/UserRole.ts'
+
+/**Модель пользователя*/
+export type UserModel = {
+    /**Идентификатор*/
     id: string
+    /**Имя пользователя*/
     username: string
-    role: string //enum
+    /**Роль*/
+    role: UserRole
+    /**Пароль*/
     password: string
 }

@@ -2,10 +2,15 @@
 import styles from './CustomButton.module.scss'
 
 type Props = {
+    /**Обработка нажатия*/
     onClick: () => void
+    /**Название кнопки*/
     title: string
 }
 
+/**
+ * Кнопка
+ */
 export const Button = memo<Props>(({
     title,
     onClick

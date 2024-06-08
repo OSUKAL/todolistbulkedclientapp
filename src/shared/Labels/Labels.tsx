@@ -1,11 +1,15 @@
 ﻿import { memo } from 'react'
 import styles from './Labels.module.scss'
-import { TicketModel } from '../../models/Ticket/TicketModel.ts'
+import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 
 type Props = {
+    /**Данные задачи*/
     data: TicketModel
 }
 
+/**
+ * Статусы
+ */
 export const Labels = memo<Props>(({
     data
 }) => {

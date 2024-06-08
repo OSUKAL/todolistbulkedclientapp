@@ -3,9 +3,13 @@ import { ModalBase } from '../../../../shared/ModalBase/ModalBase.tsx'
 import { CreateTicketForm } from '../../../Ticket/CreateTicketForm/CreateTicketForm.tsx'
 
 type Props = {
+    /**Обработка нажатия*/
     onClick: () => void
 }
 
+/**
+ * Модальное окно создания задачи
+ */
 export const CreateTicketModal = memo<Props>(({
     onClick
 }) => {

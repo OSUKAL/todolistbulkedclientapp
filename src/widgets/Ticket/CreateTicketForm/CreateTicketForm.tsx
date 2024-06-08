@@ -29,15 +29,19 @@ const types = [
 ]
 
 type Props = {
+    /**Обработка нажатия*/
     onClick: () => void
 }
 
+/**
+ * Форма создания задачи
+ */
 export const CreateTicketForm = memo<Props>(({
     onClick
 }) => {
-    const [p, setPriority] = useState('')
-    const [s, setState] = useState('')
-    const [t, setType] = useState('')
+    const [priority, setPriority] = useState('')
+    const [state, setState] = useState('')
+    const [type, setType] = useState('')
 
     const handlePrioritySelect = useCallback((value: string) => {
         setPriority(value)
@@ -49,9 +53,9 @@ export const CreateTicketForm = memo<Props>(({
         setType(value)
     }, [])
 
-    const selectedPriority = priorities.find((item) => item.value === p)
-    const selectedState = states.find((item) => item.value === s)
-    const selectedType = types.find((item) => item.value === t)
+    const selectedPriority = priorities.find((item) => item.value === priority)
+    const selectedState = states.find((item) => item.value === state)
+    const selectedType = types.find((item) => item.value === type)
 
     return (
         <FormBase isInModal={true} title={'Добавление задачи'}>
@@ -64,19 +68,19 @@ export const CreateTicketForm = memo<Props>(({
                     <Select
                         option={selectedState || null}
                         options={states}
-                        onChange={handleStateSelect}
+                        onClick={handleStateSelect}
                         placeholder={'Укажите состояние задачи'}
                     />
                     <Select
                         option={selectedType || null}
                         options={types}
-                        onChange={handleTypeSelect}
+                        onClick={handleTypeSelect}
                         placeholder={'Укажите тип задачи'}
                     />
                     <Select
                         option={selectedPriority || null}
                         options={priorities}
-                        onChange={handlePrioritySelect}
+                        onClick={handlePrioritySelect}
                         placeholder={'Укажите приоритет задачи'}
                     />
                     <Button

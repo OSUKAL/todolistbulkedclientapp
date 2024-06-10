@@ -62,21 +62,7 @@ export const EditTicketForm = memo<Props>(({
     const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
     }, [])
-
-    // const [priority, setPriority] = useState(TicketPriority.Unknown)
-    // const [state, setState] = useState(TicketState.Unknown)
-    // const [type, setType] = useState(TicketType.Unknown)
-    //
-    // const handlePrioritySelect = useCallback((value: TicketPriority) => {
-    //     setPriority(value)
-    // }, [])
-    // const handleStateSelect = useCallback((value: TicketState) => {
-    //     setState(value)
-    // }, [])
-    // const handleTypeSelect = useCallback((value: TicketType) => {
-    //     setType(value)
-    // }, [])
-
+    
     const selectedPriority = priorities.find((item) => item.value === priority)
     const selectedState = states.find((item) => item.value === state)
     const selectedType = types.find((item) => item.value === type)
@@ -89,7 +75,7 @@ export const EditTicketForm = memo<Props>(({
                 </div>
                 <div className={styles.selects}>
                     <Input placeholder={'Укажите нового исполнителя'} type={'text'}/>
-                    <Select<PriorityName>
+                    <Select
                         option={selectedState!}
                         options={states}
                         onClick={handleStateSelect}

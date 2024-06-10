@@ -1,25 +1,22 @@
 ﻿import { memo, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
 import { Option } from './SelectOption/SelectOption.tsx'
-import { TicketPriority } from '../../Enums/TicketPriority.ts'
-import { TicketState } from '../../Enums/TicketState.ts'
-import { TicketType } from '../../Enums/TicketType.ts'
 
-type Props<T> = {
+type Props = {
     /**Выбранный вариант*/
-    option: T
+    option: Option
     /**Варианты выбора*/
-    options: T[]
+    options: Option[]
     /**Заполнитель*/
     placeholder?: string
     /**Обработка нажатия*/
-    onClick?: (value: T) => void
+    onClick?: (value: Option['value']) => void
 }
 
 /**
  * Выпадающий список
  */
-export const Select = memo<Props<T>>(({
+export const Select = memo<Props>(({
     option,
     options,
     placeholder,
@@ -45,7 +42,7 @@ export const Select = memo<Props<T>>(({
     }, [isOpen])
 
     /**Обработка выбора варианта из выпадающего списка*/
-    const handleOptionClick = (value: Option<any>['value']) => {
+    const handleOptionClick = (value: Option['value']) => {
         setIsOpen(false)
         onClick?.(value)
     }

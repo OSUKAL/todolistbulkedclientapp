@@ -1,25 +1,28 @@
 ﻿import { memo, MouseEventHandler, useRef } from 'react'
 import styles from './SelectOption.module.scss'
+import { TicketPriority } from '../../../Enums/TicketPriority.ts'
+import { TicketState } from '../../../Enums/TicketState.ts'
+import { TicketType } from '../../../Enums/TicketType.ts'
 
 /**Вариант выбора*/
-export type Option<T> = {
+export type Option  = {
     /**Название*/
     name: string
     /**Значение*/
-    value: T
+    value: TicketPriority | TicketState | TicketType
 }
 
-type Props<T> = {
+type Props = {
     /**Вариант выбора*/
-    option: Option<T>
+    option: Option
     /**Обработка нажатия*/
-    onClick: (value: Option<T>['value']) => void
+    onClick: (value: Option['value']) => void
 }
 
 /**
  * Элемент выпадающего списка
  */
-export const Option = memo<Props<T>>(({
+export const Option = memo<Props>(({
     option: { value, name },
     onClick
 }) => {

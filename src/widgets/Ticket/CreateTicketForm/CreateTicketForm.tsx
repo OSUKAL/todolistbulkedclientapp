@@ -7,25 +7,25 @@ import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
 import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
 
 const priorities = [
-    { title: 'Наивысший', value: '1' },
-    { title: 'Высокий', value: '2' },
-    { title: 'Средний', value: '3' },
-    { title: 'Низкий', value: '4' }
+    { name: 'Наивысший', value: '1' },
+    { name: 'Высокий', value: '2' },
+    { name: 'Средний', value: '3' },
+    { name: 'Низкий', value: '4' }
 ]
 
 const states = [
-    { title: 'В работе', value: '1' },
-    { title: 'Выполнена', value: '2' },
-    { title: 'В тестировании', value: '3' },
-    { title: 'Ревью', value: '4' },
-    { title: 'Приостановлена', value: '5' }
+    { name: 'В работе', value: '1' },
+    { name: 'Выполнена', value: '2' },
+    { name: 'В тестировании', value: '3' },
+    { name: 'Ревью', value: '4' },
+    { name: 'Приостановлена', value: '5' }
 ]
 
 const types = [
-    { title: 'Тестирование', value: '1' },
-    { title: 'Разработка', value: '2' },
-    { title: 'Исследование', value: '3' },
-    { title: 'Исправление ошибки', value: '4' }
+    { name: 'Тестирование', value: '1' },
+    { name: 'Разработка', value: '2' },
+    { name: 'Исследование', value: '3' },
+    { name: 'Исправление ошибки', value: '4' }
 ]
 
 type Props = {

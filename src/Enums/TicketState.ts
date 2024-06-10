@@ -1,5 +1,7 @@
 ﻿/**Состояние задачи*/
 export enum TicketState {
+    /**Неизвестный*/
+    Unknown = 0,
     /**В работе*/
     InProgress = 1,
     /**Выполнена*/

@@ -1,26 +1,29 @@
 ﻿import { memo, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
 import { Option } from './SelectOption/SelectOption.tsx'
+import { TicketPriority } from '../../Enums/TicketPriority.ts'
+import { TicketState } from '../../Enums/TicketState.ts'
+import { TicketType } from '../../Enums/TicketType.ts'
 
-type Props = {
+type Props<T> = {
     /**Выбранный вариант*/
-    option: Option | null
+    option: T
     /**Варианты выбора*/
-    options: Option[]
+    options: T[]
     /**Заполнитель*/
     placeholder?: string
     /**Обработка нажатия*/
-    onClick?: (selected: Option['value']) => void
+    onClick?: (value: T) => void
 }
 
 /**
  * Выпадающий список
  */
-export const Select = memo<Props>(({
+export const Select = memo<Props<T>>(({
     option,
     options,
     placeholder,
-    onClick,
+    onClick
 }) => {
     const [isOpen, setIsOpen] = useState(false)
     const rootRef = useRef<HTMLDivElement>(null)
@@ -42,7 +45,7 @@ export const Select = memo<Props>(({
     }, [isOpen])
 
     /**Обработка выбора варианта из выпадающего списка*/
-    const handleOptionClick = (value: Option['value']) => {
+    const handleOptionClick = (value: Option<any>['value']) => {
         setIsOpen(false)
         onClick?.(value)
     }
@@ -65,7 +68,7 @@ export const Select = memo<Props>(({
                 onClick={handlePlaceHolderClick}
                 role={'button'}
             >
-                {option?.title || placeholder}
+                {option?.name || placeholder}
             </div>
             {isOpen && (
                 <ul className={styles.options}>

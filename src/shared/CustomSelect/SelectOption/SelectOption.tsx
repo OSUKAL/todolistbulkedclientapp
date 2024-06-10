@@ -1,49 +1,30 @@
-﻿import { memo, MouseEventHandler, useEffect, useRef } from 'react'
+﻿import { memo, MouseEventHandler, useRef } from 'react'
 import styles from './SelectOption.module.scss'
 
 /**Вариант выбора*/
-export type Option = {
+export type Option<T> = {
     /**Название*/
-    title: string
+    name: string
     /**Значение*/
-    value: string
+    value: T
 }
 
-type Props = {
+type Props<T> = {
     /**Вариант выбора*/
-    option: Option
+    option: Option<T>
     /**Обработка нажатия*/
-    onClick: (value: Option['value']) => void
+    onClick: (value: Option<T>['value']) => void
 }
 
 /**
  * Элемент выпадающего списка
  */
-export const Option = memo<Props>(({
-    option: { value, title },
+export const Option = memo<Props<T>>(({
+    option: { value, name },
     onClick
 }) => {
     const optionRef = useRef<HTMLLIElement>(null)
     
-    useEffect(() => {
-        const option = optionRef.current
-        if(!option)
-            return
-        
-        const handleEnterPress = (event: KeyboardEvent) => {
-            if((document.activeElement === option) && event.key === 'Enter') {
-                onClick(value)
-            }
-        }
-        
-        option.addEventListener('keydown', handleEnterPress)
-        
-        return () => {
-            option.removeEventListener('keydown', handleEnterPress)
-        }
-    }, [value, onClick])
-
-
     /**Обработка нажатия на вариант выпадающего списка*/
     const handleClick = (clickedValue: Option['value']): MouseEventHandler<HTMLLIElement> =>
         () => {
@@ -58,7 +39,7 @@ export const Option = memo<Props>(({
             onClick={handleClick(value)}
             tabIndex={0}
         >
-            {title}
+            {name}
         </li>
     )
 })

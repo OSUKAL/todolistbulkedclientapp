@@ -6,27 +6,33 @@ import styles from '../TicketForm.module.scss'
 import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
 import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
 import type { TicketModel } from '../../../models/Ticket/TicketModel.ts'
+import { PriorityName } from '../Models/PriorityName.ts'
+import { TicketPriority } from '../../../Enums/TicketPriority.ts'
+import { StateName } from '../Models/StateName.ts'
+import { TicketState } from '../../../Enums/TicketState.ts'
+import { TypeName } from '../Models/TypeName.ts'
+import { TicketType } from '../../../Enums/TicketType.ts'
 
-const priorities = [
-    { title: 'Наивысший', value: '1' },
-    { title: 'Высокий', value: '2' },
-    { title: 'Средний', value: '3' },
-    { title: 'Низкий', value: '4' }
+const priorities :PriorityName[] = [
+    { name: 'Наивысший', value: TicketPriority.Top },
+    { name: 'Высокий', value: TicketPriority.High },
+    { name: 'Средний', value: TicketPriority.Mid },
+    { name: 'Низкий', value: TicketPriority.Low }
 ]
 
-const states = [
-    { title: 'В работе', value: '1' },
-    { title: 'Выполнена', value: '2' },
-    { title: 'В тестировании', value: '3' },
-    { title: 'Ревью', value: '4' },
-    { title: 'Приостановлена', value: '5' }
+const states: StateName[] = [
+    { name: 'В работе', value: TicketState.InProgress },
+    { name: 'Выполнена', value: TicketState.Done },
+    { name: 'В тестировании', value: TicketState.Testing },
+    { name: 'Ревью', value: TicketState.Review },
+    { name: 'Приостановлена', value: TicketState.Paused }
 ]
 
-const types = [
-    { title: 'Тестирование', value: '1' },
-    { title: 'Разработка', value: '2' },
-    { title: 'Исследование', value: '3' },
-    { title: 'Исправление ошибки', value: '4' }
+const types :TypeName[] = [
+    { name: 'Тестирование', value: TicketType.Test },
+    { name: 'Разработка', value: TicketType.Development },
+    { name: 'Исследование', value: TicketType.Research },
+    { name: 'Исправление ошибки', value: TicketType.Fix }
 ]
 
 type Props = {
@@ -43,19 +49,33 @@ export const EditTicketForm = memo<Props>(({
     data,
     onClick
 }) => {
-    const [priority, setPriority] = useState('')
-    const [state, setState] = useState('')
-    const [type, setType] = useState('')
+    const [priority, setPriority] = useState(TicketPriority.Unknown)
+    const [state, setState] = useState(TicketState.Unknown)
+    const [type, setType] = useState(TicketType.Unknown)
 
-    const handlePrioritySelect = useCallback((value: string) => {
+    const handlePrioritySelect = useCallback((value: TicketPriority) => {
         setPriority(value)
     }, [])
-    const handleStateSelect = useCallback((value: string) => {
+    const handleStateSelect = useCallback((value: TicketState) => {
         setState(value)
     }, [])
-    const handleTypeSelect = useCallback((value: string) => {
+    const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
     }, [])
+
+    // const [priority, setPriority] = useState(TicketPriority.Unknown)
+    // const [state, setState] = useState(TicketState.Unknown)
+    // const [type, setType] = useState(TicketType.Unknown)
+    //
+    // const handlePrioritySelect = useCallback((value: TicketPriority) => {
+    //     setPriority(value)
+    // }, [])
+    // const handleStateSelect = useCallback((value: TicketState) => {
+    //     setState(value)
+    // }, [])
+    // const handleTypeSelect = useCallback((value: TicketType) => {
+    //     setType(value)
+    // }, [])
 
     const selectedPriority = priorities.find((item) => item.value === priority)
     const selectedState = states.find((item) => item.value === state)
@@ -69,20 +89,20 @@ export const EditTicketForm = memo<Props>(({
                 </div>
                 <div className={styles.selects}>
                     <Input placeholder={'Укажите нового исполнителя'} type={'text'}/>
-                    <Select
-                        option={selectedState || null}
+                    <Select<PriorityName>
+                        option={selectedState!}
                         options={states}
                         onClick={handleStateSelect}
                         placeholder={data.state.toString()}
                     />
                     <Select
-                        option={selectedType || null}
+                        option={selectedType!}
                         options={types}
                         onClick={handleTypeSelect}
                         placeholder={data.type.toString()}
                     />
                     <Select
-                        option={selectedPriority || null}
+                        option={selectedPriority!}
                         options={priorities}
                         onClick={handlePrioritySelect}
                         placeholder={data.priority.toString()}

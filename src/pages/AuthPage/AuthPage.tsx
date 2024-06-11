@@ -3,14 +3,14 @@ import styles from './AuthPage.module.scss'
 import { memo } from 'react'
 import { Container } from '../../shared/Container/Container.tsx'
 import { Content } from '../../shared/Content/Content.tsx'
-import { CreateUserForm } from '../../widgets/Auth/CreateUserForm/CreateUserForm.tsx'
-import { LoginForm } from '../../widgets/Auth/LoginForm/LoginForm.tsx'
-import { EditUserForm } from '../../widgets/Auth/EditUserForm/EditUserForm.tsx'
+import { CreateUserForm } from '../../widgets/Forms/Auth/CreateUserForm/CreateUserForm.tsx'
+import { LoginForm } from '../../widgets/Forms/Auth/LoginForm/LoginForm.tsx'
+import { EditUserForm } from '../../widgets/Forms/Auth/EditUserForm/EditUserForm.tsx'
 import type { UserModel } from '../../models/User/UserModel.ts'
 import { UserRole } from '../../Enums/UserRole.ts'
 
 /**
- * Экран авторизации
+ * Страница авторизации
  */
 export const AuthPage = memo(() => {
     const user: UserModel = {

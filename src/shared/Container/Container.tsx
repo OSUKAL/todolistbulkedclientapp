@@ -2,7 +2,7 @@
 import styles from './Container.module.scss'
 
 /**
- * Контейнер
+ * Контейнер для ограничения минимальной ширины контента
  */
 export const Container = memo<PropsWithChildren>(({ 
     children 

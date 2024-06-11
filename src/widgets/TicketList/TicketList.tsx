@@ -49,7 +49,7 @@ export const TicketList = memo<Props>(({
             </div>
 
             {isModalOpen && (
-                <CreateTicketModal 
+                <CreateTicketModal
                     onClick={handleModalToggle}
                 />
             )}

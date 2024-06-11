@@ -1,7 +1,7 @@
 ﻿import { memo } from 'react'
 import { ModalBase } from '../../../../shared/ModalBase/ModalBase.tsx'
 import type { TicketModel } from '../../../../models/Ticket/TicketModel.ts'
-import { EditTicketForm } from '../../../Ticket/EditTicketForm/EditTicketForm.tsx'
+import { EditTicketForm } from '../../../Forms/Ticket/EditTicketForm/EditTicketForm.tsx'
 
 type Props = {
     /**Обработка нажатия*/

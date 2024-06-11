@@ -1,74 +1,80 @@
-﻿import { memo, MouseEventHandler, useEffect, useRef, useState } from 'react'
+﻿import React, { memo, MouseEventHandler, useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
 import { Option } from './SelectOption/SelectOption.tsx'
 
-type Props = {
+type Props<T> = {
     /**Выбранный вариант*/
-    option: Option
+    selected: Option<T>
     /**Варианты выбора*/
-    options: Option[]
+    options: Option<T>[]
     /**Заполнитель*/
     placeholder?: string
     /**Обработка нажатия*/
-    onClick?: (value: Option['value']) => void
+    onClick?: (value: Option<T>['value']) => void
 }
 
 /**
  * Выпадающий список
  */
-export const Select = memo<Props>(({
-    option,
+function SelectGeneric<T extends number>({
+    selected,
     options,
     placeholder,
     onClick
-}) => {
+}: Props<T>) {
+    const selectRef = useRef<HTMLDivElement>(null)
     const [isOpen, setIsOpen] = useState(false)
-    const rootRef = useRef<HTMLDivElement>(null)
-    const placeholderRef = useRef<HTMLDivElement>(null)
+
+    /**Обработка закрытия выпадающего списка по клику вне списка*/
+    const handleClickOutside = (event: MouseEvent) => {
+        const { target } = event
+        if (target instanceof Node && !selectRef.current?.contains(target))
+            setIsOpen(false)
+    }
 
     useEffect(() => {
-        const handleClick = (event: MouseEvent) => {
-            const { target } = event
-            if (target instanceof Node && !rootRef.current?.contains(target)) {
-                setIsOpen(false)
-            }
-        }
-
-        window.addEventListener('click', handleClick)
+        document.addEventListener('click', handleClickOutside)
 
         return () => {
-            window.removeEventListener('click', handleClick)
+            document.removeEventListener('click', handleClickOutside)
         }
-    }, [isOpen])
+    }, [handleClickOutside])
 
     /**Обработка выбора варианта из выпадающего списка*/
-    const handleOptionClick = (value: Option['value']) => {
+    const handleOptionClick = (value: Option<T>['value']) => {
         setIsOpen(false)
         onClick?.(value)
+    }
+
+    /**Обработка нажатия на выпадающий список*/
+    const handleOptionsClick = (event: React.MouseEvent<HTMLUListElement>) => {
+        event.stopPropagation()
     }
 
     /**Обработка открытия списка вариантов*/
     const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
         setIsOpen((prev) => !prev)
     }
-    
+
     return (
         <div
             className={styles.select}
-            ref={rootRef}
+            ref={selectRef}
         >
             <div className={styles.arrow}></div>
 
             <div
                 className={styles.placeholder}
-                ref={placeholderRef}
                 onClick={handlePlaceHolderClick}
                 role={'button'}
             >
-                {option?.name || placeholder}
+                {selected?.name || placeholder}
             </div>
             {isOpen && (
-                <ul className={styles.options}>
+                <ul
+                    className={styles.options}
+                    onClick={handleOptionsClick}
+                >
                     {options.map((option) => (
                         <Option
                             key={option.value}
@@ -79,7 +85,8 @@ export const Select = memo<Props>(({
                 </ul>
             )}
         </div>
+
     )
-})
+}
 
-
+export const Select = memo(SelectGeneric) as typeof SelectGeneric

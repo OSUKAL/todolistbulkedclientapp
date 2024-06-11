@@ -13,6 +13,25 @@
   cursor: pointer;
   
   position: relative;
+
+  .options{
+    display: block;
+
+    background: whitesmoke;
+    border: 2px rgb(77, 84, 197) solid;
+
+    border-radius: 1rem;
+
+    list-style-type: none;
+
+    overflow: hidden;
+
+    position: absolute;
+    top: 110%;
+    left: -0.2rem;
+    right: -0.2rem;
+    z-index: 10;
+  }
   
   .arrow{
     content: "";
@@ -28,38 +47,21 @@
     transform: translate3d(-1.3rem, 50%, 0) rotateZ(45deg);
   }
 
-  &:focus-within{
-    .arrow{
-      right: 0;
-      top: 0;
-      transform: translate3d(-1.3rem, 125%, 0) rotateZ(-135deg);
-    }
-  }
+  //&:{
+  //  .arrow{
+  //    right: 0;
+  //    top: 0;
+  //    transform: translate3d(-1.3rem, 125%, 0) rotateZ(-135deg);
+  //  }
+  //}
   
   .placeholder{
     padding: .5rem 4rem;
   }
   
-  .options{
-    display: block;
-
-    background: whitesmoke;
-    border: 2px rgb(77, 84, 197) solid;
-    
-    border-radius: 1rem;
-
-    list-style-type: none;
-    
-    overflow: hidden;
-    
-    position: absolute;
-    top: 110%;
-    left: -0.2rem;
-    right: -0.2rem;
-    z-index: 10;
-  }
   
-  &:hover, {
+  
+  &:hover {
     border-color: rgb(77, 84, 197);
   }
 }

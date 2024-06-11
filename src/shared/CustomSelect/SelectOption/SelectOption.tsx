@@ -1,48 +1,43 @@
-﻿import { memo, MouseEventHandler, useRef } from 'react'
+﻿import { memo, MouseEventHandler } from 'react'
 import styles from './SelectOption.module.scss'
-import { TicketPriority } from '../../../Enums/TicketPriority.ts'
-import { TicketState } from '../../../Enums/TicketState.ts'
-import { TicketType } from '../../../Enums/TicketType.ts'
 
 /**Вариант выбора*/
-export type Option  = {
+export type Option<T> = {
     /**Название*/
     name: string
     /**Значение*/
-    value: TicketPriority | TicketState | TicketType
+    value: T
 }
 
-type Props = {
+type Props<T extends number> = {
     /**Вариант выбора*/
-    option: Option
+    option: Option<T>
     /**Обработка нажатия*/
-    onClick: (value: Option['value']) => void
+    onClick: (value: Option<T>['value']) => void
 }
 
 /**
  * Элемент выпадающего списка
  */
-export const Option = memo<Props>(({
-    option: { value, name },
+function OptionGeneric<T extends number>({
+    option,
     onClick
-}) => {
-    const optionRef = useRef<HTMLLIElement>(null)
-    
-    /**Обработка нажатия на вариант выпадающего списка*/
-    const handleClick = (clickedValue: Option['value']): MouseEventHandler<HTMLLIElement> =>
+}: Props<T>) {
+    const handleClick = (clickedValue: Option<T>['value']): MouseEventHandler<HTMLLIElement> =>
         () => {
             onClick(clickedValue)
         }
-
+        
     return (
         <li
             className={styles.option}
-            ref={optionRef}
-            value={value}
-            onClick={handleClick(value)}
+            value={option.value}
+            onClick={handleClick(option.value)}
             tabIndex={0}
         >
-            {name}
+            {option.name}
         </li>
     )
-})
+}
+
+export const Option = memo(OptionGeneric) as typeof OptionGeneric

@@ -8,13 +8,13 @@ import { TicketType } from '../../Enums/TicketType.ts'
 import { TicketPriority } from '../../Enums/TicketPriority.ts'
 
 /**
- * Экран списка задач
+ * Страница списка задач
  */
 export const MainPage = memo(() => {
     const tickets: TicketModel[] = [
         {
             id: '1',
-            title: 'Сверстать экран',
+            name: 'Сверстать экран',
             number: 'РК-20240605001954',
             creator: {
                 id: 'ZUVUYER',

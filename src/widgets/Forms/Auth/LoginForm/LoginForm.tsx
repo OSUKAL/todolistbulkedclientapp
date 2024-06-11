@@ -1,7 +1,7 @@
 ﻿import { memo } from 'react'
-import { Input } from '../../../shared/CustomInput/CustomInput.tsx'
-import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
-import { FormBase } from '../../../shared/FormBase/FormBase.tsx'
+import { Input } from '../../../../shared/CustomInput/CustomInput.tsx'
+import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
+import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 
 /**
  * Форма авторизации

@@ -8,7 +8,7 @@ type Props = {
 }
 
 /**
- * Базовый экран
+ * База страницы
  */
 export const BasePage = memo<PropsWithChildren<Props>>(({
     children,

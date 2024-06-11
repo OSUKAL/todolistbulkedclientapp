@@ -10,8 +10,6 @@ type Props = {
     data: TicketModel
 }
 
-// Редюсеры для приоритета, статуса и типа задачи
-
 /**
  * Информация о задаче
  */
@@ -42,7 +40,7 @@ export const TicketInfo = memo<Props>(({
                         </div>
                     )}
                 </div>
-                <div className={styles.title}>{data.title}</div>
+                <div className={styles.title}>{data.name}</div>
                 <Labels data={data}/>
             </div>
 

@@ -1,17 +1,17 @@
 ﻿import { memo, useCallback, useState } from 'react'
-import { FormBase } from '../../../shared/FormBase/FormBase.tsx'
-import { Input } from '../../../shared/CustomInput/CustomInput.tsx'
-import { Select } from '../../../shared/CustomSelect/CustomSelect.tsx'
+import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
+import { Input } from '../../../../shared/CustomInput/CustomInput.tsx'
+import { Select } from '../../../../shared/CustomSelect/CustomSelect.tsx'
 import styles from '../TicketForm.module.scss'
-import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
-import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
-import type { TicketModel } from '../../../models/Ticket/TicketModel.ts'
-import { PriorityName } from '../Models/PriorityName.ts'
-import { TicketPriority } from '../../../Enums/TicketPriority.ts'
-import { StateName } from '../Models/StateName.ts'
-import { TicketState } from '../../../Enums/TicketState.ts'
-import { TypeName } from '../Models/TypeName.ts'
-import { TicketType } from '../../../Enums/TicketType.ts'
+import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
+import { Textarea } from '../../../../shared/СustomTextarea/CustomTextarea.tsx'
+import { PriorityName } from '../../Models/PriorityName.ts'
+import { TicketPriority } from '../../../../Enums/TicketPriority.ts'
+import { StateName } from '../../Models/StateName.ts'
+import { TicketState } from '../../../../Enums/TicketState.ts'
+import { TypeName } from '../../Models/TypeName.ts'
+import { TicketType } from '../../../../Enums/TicketType.ts'
+import { TicketModel } from '../../../../models/Ticket/TicketModel.ts'
 
 const priorities :PriorityName[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -35,18 +35,27 @@ const types :TypeName[] = [
     { name: 'Исправление ошибки', value: TicketType.Fix }
 ]
 
+const defaultType: TypeName = {
+    name: 'Укажите тип задачи', value: TicketType.Unknown
+}
+const defaultState: StateName = {
+    name: 'Укажите состояние задачи', value: TicketState.Unknown
+}
+const defaultPriority: PriorityName = {
+    name: 'Укажите приоритет задачи', value: TicketPriority.Unknown
+}
+
 type Props = {
     /**Обработка нажатия*/
     onClick: () => void
-    /**Данные задачи*/
-    data: TicketModel
+    
+    data?:TicketModel
 }
 
 /**
- * Форма редактирования задачи
+ * Форма создания задачи
  */
-export const EditTicketForm = memo<Props>(({
-    data,
+export const CreateTicketForm = memo<Props>(({
     onClick
 }) => {
     const [priority, setPriority] = useState(TicketPriority.Unknown)
@@ -62,40 +71,37 @@ export const EditTicketForm = memo<Props>(({
     const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
     }, [])
-    
-    const selectedPriority = priorities.find((item) => item.value === priority)
-    const selectedState = states.find((item) => item.value === state)
-    const selectedType = types.find((item) => item.value === type)
+
+    const selectedPriority = priorities.find((item) => item.value === priority) ?? defaultPriority
+    const selectedState = states.find((item) => item.value === state) ?? defaultState
+    const selectedType = types.find((item) => item.value === type) ?? defaultType
 
     return (
-        <FormBase isInModal={true} title={'Редактирование задачи'}>
+        <FormBase isInModal={true} title={'Добавление задачи'}>
             <div className={styles.columns}>
                 <div className={styles.textarea}>
-                    <Textarea placeholder={'Описание задачи'}/>
+                    <Textarea placeholder={'Укажите описание задачи'}/>
                 </div>
                 <div className={styles.selects}>
-                    <Input placeholder={'Укажите нового исполнителя'} type={'text'}/>
-                    <Select
-                        option={selectedState!}
+                    <Input placeholder={'Укажите исполнителя'} type={'text'}/>
+                    <Select<TicketState>
+                        selected={selectedState}
                         options={states}
                         onClick={handleStateSelect}
-                        placeholder={data.state.toString()}
                     />
-                    <Select
-                        option={selectedType!}
+                    <Select<TicketType>
+                        selected={selectedType}
                         options={types}
                         onClick={handleTypeSelect}
-                        placeholder={data.type.toString()}
                     />
-                    <Select
-                        option={selectedPriority!}
+                    <Select<TicketPriority>
+                        selected={selectedPriority}
                         options={priorities}
                         onClick={handlePrioritySelect}
-                        placeholder={data.priority.toString()}
                     />
                     <Button
                         onClick={onClick}
-                        title={'Подтвердить'}
+                        title={'Создать'}
                     />
                 </div>
             </div>

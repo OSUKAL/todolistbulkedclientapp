@@ -1,5 +1,4 @@
 ﻿import { memo } from 'react'
-import styles from './MainPage.module.scss'
 import { BasePage } from '../../shared/BasePage/BasePage.tsx'
 import { TicketList } from '../../widgets/TicketList/TicketList.tsx'
 import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
@@ -33,10 +32,8 @@ export const MainPage = memo(() => {
     ]
 
     return (
-        <div className={styles.main}>
-            <BasePage>
-                <TicketList data={tickets}/>
-            </BasePage>
-        </div>
+        <BasePage>
+            <TicketList data={tickets}/>
+        </BasePage>
     )
 })

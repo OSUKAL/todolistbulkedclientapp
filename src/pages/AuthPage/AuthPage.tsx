@@ -1,5 +1,4 @@
 ﻿import { BasePage } from '../../shared/BasePage/BasePage.tsx'
-import styles from './AuthPage.module.scss'
 import { memo } from 'react'
 import { Container } from '../../shared/Container/Container.tsx'
 import { Content } from '../../shared/Content/Content.tsx'
@@ -19,18 +18,16 @@ export const AuthPage = memo(() => {
         role: UserRole.Admin,
         password: '12345678'
     }
-    
+
     return (
-        <div className={styles.auth}>
-            <BasePage>
-                <Content>
-                    <Container>
-                        <CreateUserForm/>
-                        <LoginForm/>
-                        <EditUserForm data={user}/>
-                    </Container>
-                </Content>
-            </BasePage>
-        </div>
+        <BasePage>
+            <Content>
+                <Container>
+                    <CreateUserForm/>
+                    <LoginForm/>
+                    <EditUserForm data={user}/>
+                </Container>
+            </Content>
+        </BasePage>
     )
 })

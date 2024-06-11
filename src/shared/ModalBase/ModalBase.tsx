@@ -15,6 +15,7 @@ export const ModalBase = memo<PropsWithChildren<Props>>(({
 }) => {
     const contentRef = useRef<any>(null)
 
+    /**Обработка нажатия вне содержимого модального окна*/
     const handleClickOutside = (event: MouseEvent) => {
         if(event.target instanceof Node && contentRef.current && !contentRef.current.contains(event.target)){
             console.log('Клик вне контента')
@@ -32,6 +33,7 @@ export const ModalBase = memo<PropsWithChildren<Props>>(({
     
     return (
         <div className={styles.modal}>
+            {/*Тег для работы закрытия по клику вне содержимого модального окна*/}
             <div className={styles.content} ref={contentRef}>
                 {children}
             </div>

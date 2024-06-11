@@ -1,5 +1,4 @@
 ﻿import { memo } from 'react'
-import styles from './TicketPage.module.scss'
 import { BasePage } from '../../shared/BasePage/BasePage.tsx'
 import { Container } from '../../shared/Container/Container.tsx'
 import { TicketInfo } from '../../widgets/TicketInfo/TicketInfo.tsx'
@@ -16,9 +15,9 @@ export const TicketPage = memo(() => {
         id: '12345',
         name: 'Сверстать экран инфо о задаче',
         number: 'РК-20240605001954',
-        creator: { 
+        creator: {
             id: 'ZUVUYER',
-            username: 'ZUVUYER' 
+            username: 'ZUVUYER'
         },
         performer: {
             id: 'XxX_BlackKamaro_XxX',
@@ -26,19 +25,17 @@ export const TicketPage = memo(() => {
         },
         date: new Date(),
         description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
-        
+
         state: TicketState.Testing,
         type: TicketType.Research,
         priority: TicketPriority.Low
     }
 
     return (
-        <div className={styles.ticket}>
-            <BasePage>
-                <Container>
-                    <TicketInfo data={ticket}/>
-                </Container>
-            </BasePage>
-        </div>
+        <BasePage>
+            <Container>
+                <TicketInfo data={ticket}/>
+            </Container>
+        </BasePage>
     )
 })

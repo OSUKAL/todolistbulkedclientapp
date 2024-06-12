@@ -4,7 +4,7 @@ import styles from './CustomTextarea.module.scss'
 type Props = {
     /**Заполнитель*/
     placeholder: string
-    /**Значение*/
+    /**Начальное значение*/
     initValue?: string
 }
 

@@ -6,7 +6,8 @@ type Props = {
     placeholder: string
     /**Тип поля ввода*/
     type: string
-    
+    /**Начальное значение*/
+    initValue?: string
 }
 
 /**
@@ -14,10 +15,12 @@ type Props = {
  */
 export const Input = memo<Props>(({
     placeholder,
+    initValue,
     type
 }) => {
     return (
         <input
+            defaultValue={initValue}
             className={styles.input}
             type={type}
             placeholder={placeholder}

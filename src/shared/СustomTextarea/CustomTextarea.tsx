@@ -18,14 +18,12 @@ export const Textarea = memo<Props>(({
     const [value, setValue] = useState(initValue)
     
     const handleValueChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const textareaValue = event.target.value
-        setValue(textareaValue)
-    },[])
-    
+        setValue(event.target.value)
+    },[setValue])
     
     return (
         <textarea
-            defaultValue={initValue}
+            defaultValue={value}
             placeholder={placeholder} 
             className={styles.textarea}
             onChange={handleValueChange}

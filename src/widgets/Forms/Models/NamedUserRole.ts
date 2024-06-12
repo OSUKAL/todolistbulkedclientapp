@@ -1,6 +1,6 @@
 ﻿import { UserRole } from '../../../Enums/UserRole.ts'
 
-export type RoleName = {
+export type NamedUserRole = {
     name: string
     value: UserRole
 }

@@ -7,8 +7,6 @@ type Props<T> = {
     selected: Option<T>
     /**Варианты выбора*/
     options: Option<T>[]
-    /**Заполнитель*/
-    placeholder?: string
     /**Обработка нажатия*/
     onClick?: (value: Option<T>['value']) => void
 }
@@ -19,7 +17,6 @@ type Props<T> = {
 function SelectGeneric<T extends number>({
     selected,
     options,
-    placeholder,
     onClick
 }: Props<T>) {
     const selectRef = useRef<HTMLDivElement>(null)
@@ -68,7 +65,7 @@ function SelectGeneric<T extends number>({
                 onClick={handlePlaceHolderClick}
                 role={'button'}
             >
-                {selected?.name || placeholder}
+                {selected.name}
             </div>
             {isOpen && (
                 <ul
@@ -85,7 +82,6 @@ function SelectGeneric<T extends number>({
                 </ul>
             )}
         </div>
-
     )
 }
 

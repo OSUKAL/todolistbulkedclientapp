@@ -1,6 +1,6 @@
 ﻿import { TicketState } from '../../../Enums/TicketState.ts'
 
-export type StateName = {
+export type NamedTicketState = {
     name: string
     value: TicketState
 }

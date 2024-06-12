@@ -5,15 +5,19 @@ import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
 import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 import type { UserModel } from '../../../../models/User/UserModel.ts'
 import { UserRole } from '../../../../Enums/UserRole.ts'
-import { RoleName } from '../../Models/RoleName.ts'
+import { NamedUserRole } from '../../Models/NamedUserRole.ts'
 
-const roles:RoleName[] = [
+const roles: NamedUserRole[] = [
     {name: 'Администратор', value: UserRole.Admin},
     {name: 'Руководитель команды', value: UserRole.TeamLeader},
     {name: 'Разработчик', value: UserRole.Developer},
     {name: 'Тестировщик', value: UserRole.Tester},
     {name: 'Аналитик', value: UserRole.Analyst}
 ]
+
+const defaultRole: NamedUserRole = {
+    name: 'Укажите роль пользователя', value: UserRole.Unknown
+}
 
 type Props = {
     /**Данные пользователя*/
@@ -31,16 +35,15 @@ export const EditUserForm = memo<Props>(({
         setRole(value)
     }
 
-    const selectedRole = roles.find((item) => item.value === role)
+    const selectedRole = roles.find((item) => item.value === role) ?? defaultRole
 
     return(
         <FormBase title={'Редактирование пользователя'}>
             <Input type={'text'} placeholder={data.username}/>
             <Select<UserRole>
-                selected={selectedRole || roles[data.role]}
+                selected={selectedRole}
                 options={roles}
                 onClick={handleRoleSelect}
-                placeholder={data.role.toString()}
             />
             <Button onClick={()=>{}} title={'Подтвердить'}/>
         </FormBase>

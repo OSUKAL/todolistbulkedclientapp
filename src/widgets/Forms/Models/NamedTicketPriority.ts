@@ -1,6 +1,6 @@
 ﻿import { TicketPriority } from '../../../Enums/TicketPriority.ts'
 
-export type PriorityName = {
+export type NamedTicketPriority = {
     name: string
     value: TicketPriority
 }

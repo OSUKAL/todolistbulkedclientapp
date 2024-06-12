@@ -1,13 +1,10 @@
 ﻿import { memo } from 'react'
 import { ModalBase } from '../../../../shared/ModalBase/ModalBase.tsx'
-import { CreateTicketForm } from '../../../Forms/Ticket/CreateTicketForm/CreateTicketForm.tsx'
-import { TicketModel } from '../../../../models/Ticket/TicketModel.ts'
+import { TicketForm } from '../../../Forms/Ticket/TicketForm.tsx'
 
 type Props = {
     /**Обработка нажатия*/
     onClick: () => void
-    
-    data?:TicketModel
 }
 
 /**
@@ -18,9 +15,9 @@ export const CreateTicketModal = memo<Props>(({
 }) => {
     return (
         <ModalBase close={onClick}>
-            <CreateTicketForm
+            <TicketForm
                 onClick={onClick}
-            />
+                formHeader={'Добавление задачи'}/>
         </ModalBase>
     )
 })

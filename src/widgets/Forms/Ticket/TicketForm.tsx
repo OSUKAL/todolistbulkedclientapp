@@ -1,26 +1,26 @@
-﻿import { memo, useCallback, useState } from 'react'
-import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
-import { Input } from '../../../../shared/CustomInput/CustomInput.tsx'
-import { Select } from '../../../../shared/CustomSelect/CustomSelect.tsx'
-import styles from '../TicketForm.module.scss'
-import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
-import { Textarea } from '../../../../shared/СustomTextarea/CustomTextarea.tsx'
-import { PriorityName } from '../../Models/PriorityName.ts'
-import { TicketPriority } from '../../../../Enums/TicketPriority.ts'
-import { StateName } from '../../Models/StateName.ts'
-import { TicketState } from '../../../../Enums/TicketState.ts'
-import { TypeName } from '../../Models/TypeName.ts'
-import { TicketType } from '../../../../Enums/TicketType.ts'
-import { TicketModel } from '../../../../models/Ticket/TicketModel.ts'
+import { memo, useCallback, useState } from 'react'
+import { FormBase } from '../../../shared/FormBase/FormBase.tsx'
+import { Input } from '../../../shared/CustomInput/CustomInput.tsx'
+import { Select } from '../../../shared/CustomSelect/CustomSelect.tsx'
+import styles from './TicketForm.module.scss'
+import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
+import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
+import type { TicketModel } from '../../../models/Ticket/TicketModel.ts'
+import { NamedTicketPriority } from '../Models/NamedTicketPriority.ts'
+import { TicketPriority } from '../../../Enums/TicketPriority.ts'
+import { NamedTicketState } from '../Models/NamedTicketState.ts'
+import { TicketState } from '../../../Enums/TicketState.ts'
+import { NamedTicketType } from '../Models/NamedTicketType.ts'
+import { TicketType } from '../../../Enums/TicketType.ts'
 
-const priorities :PriorityName[] = [
+const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
     { name: 'Высокий', value: TicketPriority.High },
     { name: 'Средний', value: TicketPriority.Mid },
     { name: 'Низкий', value: TicketPriority.Low }
 ]
 
-const states: StateName[] = [
+const states: NamedTicketState[] = [
     { name: 'В работе', value: TicketState.InProgress },
     { name: 'Выполнена', value: TicketState.Done },
     { name: 'В тестировании', value: TicketState.Testing },
@@ -28,39 +28,43 @@ const states: StateName[] = [
     { name: 'Приостановлена', value: TicketState.Paused }
 ]
 
-const types :TypeName[] = [
+const types: NamedTicketType[] = [
     { name: 'Тестирование', value: TicketType.Test },
     { name: 'Разработка', value: TicketType.Development },
     { name: 'Исследование', value: TicketType.Research },
     { name: 'Исправление ошибки', value: TicketType.Fix }
 ]
 
-const defaultType: TypeName = {
+const defaultType: NamedTicketType = {
     name: 'Укажите тип задачи', value: TicketType.Unknown
 }
-const defaultState: StateName = {
+const defaultState: NamedTicketState = {
     name: 'Укажите состояние задачи', value: TicketState.Unknown
 }
-const defaultPriority: PriorityName = {
+const defaultPriority: NamedTicketPriority = {
     name: 'Укажите приоритет задачи', value: TicketPriority.Unknown
 }
 
 type Props = {
     /**Обработка нажатия*/
     onClick: () => void
-    
-    data?:TicketModel
+    /**Данные задачи*/
+    data?: TicketModel
+    /**Заголовок формы*/
+    formHeader: string
 }
 
 /**
- * Форма создания задачи
+ * Форма редактирования задачи
  */
-export const CreateTicketForm = memo<Props>(({
-    onClick
+export const TicketForm = memo<Props>(({
+    data,
+    onClick,
+    formHeader
 }) => {
-    const [priority, setPriority] = useState(TicketPriority.Unknown)
-    const [state, setState] = useState(TicketState.Unknown)
-    const [type, setType] = useState(TicketType.Unknown)
+    const [priority, setPriority] = useState(data?.priority ?? TicketPriority.Unknown)
+    const [state, setState] = useState(data?.state ?? TicketState.Unknown)
+    const [type, setType] = useState(data?.type ?? TicketType.Unknown)
 
     const handlePrioritySelect = useCallback((value: TicketPriority) => {
         setPriority(value)
@@ -77,13 +81,13 @@ export const CreateTicketForm = memo<Props>(({
     const selectedType = types.find((item) => item.value === type) ?? defaultType
 
     return (
-        <FormBase isInModal={true} title={'Добавление задачи'}>
+        <FormBase isInModal={true} title={formHeader}>
             <div className={styles.columns}>
                 <div className={styles.textarea}>
-                    <Textarea placeholder={'Укажите описание задачи'}/>
+                    <Textarea initValue={data?.description} placeholder={'Описание задачи'}/>
                 </div>
                 <div className={styles.selects}>
-                    <Input placeholder={'Укажите исполнителя'} type={'text'}/>
+                    <Input initValue={data?.performer.username} placeholder={'Укажите исполнителя'} type={'text'}/>
                     <Select<TicketState>
                         selected={selectedState}
                         options={states}
@@ -101,7 +105,7 @@ export const CreateTicketForm = memo<Props>(({
                     />
                     <Button
                         onClick={onClick}
-                        title={'Создать'}
+                        title={'Подтвердить'}
                     />
                 </div>
             </div>

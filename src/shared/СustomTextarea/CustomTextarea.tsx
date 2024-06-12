@@ -15,9 +15,10 @@ export const Textarea = memo<Props>(({
     initValue,
     placeholder
 }) => {
-    const [value, setValue] = useState(initValue)
+    const [value, setValue] = useState(initValue ?? '')
     
-    const handleValueChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    /**Обработка изменения*/
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setValue(event.target.value)
     },[setValue])
     
@@ -26,7 +27,7 @@ export const Textarea = memo<Props>(({
             defaultValue={value}
             placeholder={placeholder} 
             className={styles.textarea}
-            onChange={handleValueChange}
+            onChange={handleChange}
        />
     )
 })

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo } from 'react'
 import styles from './CustomInput.module.scss'
 
 type Props = {
@@ -8,30 +8,30 @@ type Props = {
     type: string
     /**Начальное значение*/
     initValue?: string
+    /**Обработка изменения*/
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+    /**Ссылка на поле для ввода*/
+    inputRef?: React.RefObject<HTMLInputElement>
 }
 
 /**
  * Поле для ввода текста
  */
 export const Input = memo<Props>(({
+    inputRef,
+    onChange,
     placeholder,
     initValue,
     type
 }) => {
-    const [value, setValue] = useState(initValue ?? '')
-    
-    /**Обработка изменения*/
-    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value)
-    }, [setValue])
-    
     return (
         <input
-            defaultValue={value}
             className={styles.input}
+            ref={inputRef}
+            value={initValue}
             type={type}
             placeholder={placeholder}
-            onChange={handleChange}
+            onChange={onChange}
         />
     )
 })

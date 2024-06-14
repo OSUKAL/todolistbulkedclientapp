@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { FormBase } from '../../../shared/FormBase/FormBase.tsx'
 import { Input } from '../../../shared/CustomInput/CustomInput.tsx'
 import { Select } from '../../../shared/CustomSelect/CustomSelect.tsx'
@@ -52,12 +52,15 @@ type Props = {
     data?: TicketModel
     /**Заголовок формы*/
     formHeader: string
+    /**Название кнопки*/
+    buttonName: string
 }
 
 /**
  * Форма редактирования задачи
  */
 export const TicketForm = memo<Props>(({
+    buttonName,
     data,
     onClick,
     formHeader
@@ -65,13 +68,47 @@ export const TicketForm = memo<Props>(({
     const [priority, setPriority] = useState(data?.priority ?? TicketPriority.Unknown)
     const [state, setState] = useState(data?.state ?? TicketState.Unknown)
     const [type, setType] = useState(data?.type ?? TicketType.Unknown)
+    const performerRef = useRef<HTMLInputElement>(null)
+    const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
+    useEffect(() => {
+        if(data === undefined || performerRef.current === null || descriptionRef.current === null)
+            return 
+        
+        performerRef.current.value = data.performerData.username
+        descriptionRef.current.value = data.description
+        
+        return () => {} //Возможно, чего-то нехватает
+    }, [descriptionRef, performerRef])
+    
+    /**Обработка нажатия на кнопку формы*/
+    const handleButtonClick = useCallback(() => {
+        if(performerRef.current === null || performerRef.current.value === ''){
+            console.log('Исполнитель задачи не назначен')
+            return
+        }
+        if(descriptionRef.current === null || descriptionRef.current.value === ''){
+            console.log('Отсутствует описание задачи')
+            return
+        }
+        
+        const ticketData: TicketModel = {
+            
+        }
+        
+    }, [onClick, performerRef, descriptionRef])
+
+    /**Обработка выбора приоритета задачи*/
     const handlePrioritySelect = useCallback((value: TicketPriority) => {
         setPriority(value)
     }, [])
+    
+    /**Обработка выбора состояния задачи*/
     const handleStateSelect = useCallback((value: TicketState) => {
         setState(value)
     }, [])
+    
+    /**Обработка выбора типа задачи*/
     const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
     }, [])
@@ -81,13 +118,24 @@ export const TicketForm = memo<Props>(({
     const selectedType = types.find((item) => item.value === type) ?? defaultType
 
     return (
-        <FormBase isInModal={true} title={formHeader}>
+        <FormBase
+            isInModal={true}
+            title={formHeader}
+        >
             <div className={styles.columns}>
                 <div className={styles.textarea}>
-                    <Textarea initValue={data?.description} placeholder={'Описание задачи'}/>
+                    <Textarea 
+                        textareaRef={descriptionRef}
+                        placeholder={'Описание задачи'}
+                    />
                 </div>
                 <div className={styles.selects}>
-                    <Input initValue={data?.performer.username} placeholder={'Укажите исполнителя'} type={'text'}/>
+                    <Input 
+                        inputRef={performerRef}
+                        onChange={() => {}}
+                        placeholder={'Укажите исполнителя'}
+                        type={'text'}
+                    />
                     <Select<TicketState>
                         selected={selectedState}
                         options={states}
@@ -105,7 +153,7 @@ export const TicketForm = memo<Props>(({
                     />
                     <Button
                         onClick={onClick}
-                        title={'Подтвердить'}
+                        title={buttonName}
                     />
                 </div>
             </div>

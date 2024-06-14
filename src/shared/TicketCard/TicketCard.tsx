@@ -18,7 +18,7 @@ export const TicketCard = memo<Props>(({
         <div className={styles.card}>
             <div className={styles.header}>
                 <div className={styles.number}>{data.number}</div>
-                <div className={styles.title}>{data.name}</div>
+                <div title={data.name} className={styles.title}>{data.name}</div>
                 <Labels data={data}/>
             </div>
 

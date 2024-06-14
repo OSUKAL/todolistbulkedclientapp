@@ -8,7 +8,7 @@ type Props<T> = {
     /**Варианты выбора*/
     options: Option<T>[]
     /**Обработка нажатия*/
-    onClick?: (value: Option<T>['value']) => void
+    onClick: (value: Option<T>['value']) => void
 }
 
 /**
@@ -40,7 +40,7 @@ function SelectGeneric<T extends number>({
     /**Обработка выбора варианта из выпадающего списка*/
     const handleOptionClick = (value: Option<T>['value']) => {
         setIsOpen(false)
-        onClick?.(value)
+        onClick(value)
     }
 
     /**Обработка нажатия на выпадающий список*/

@@ -26,9 +26,9 @@ export const TicketPage = memo(() => {
         date: new Date(),
         description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
 
-        state: TicketState.Testing,
+        state: TicketState.Paused,
         type: TicketType.Research,
-        priority: TicketPriority.Low
+        priority: TicketPriority.High
     }
 
     return (

@@ -13,7 +13,7 @@ export const MainPage = memo(() => {
     const tickets: TicketModel[] = [
         {
             id: '1',
-            name: 'Сверстать экран',
+            name: 'Сверстать экранd safas dfsadfsadasdasda asdasdasd asdasda adadasdawdac adasdasdafg dfsdf',
             number: 'РК-20240605001954',
             creator: {
                 id: 'ZUVUYER',

@@ -22,17 +22,18 @@ export const TicketInfo = memo<Props>(({
 
     /**Обработка нажатия на создателя задачи*/
     const handleCreatorClick = useCallback(() => {
-        navigateToMainSearch(`/main?creator=${data.creator.username}`)
-    }, [navigateToMainSearch])/**Обработка нажатия на создателя задачи*/
-    
+        navigateToMainSearch(`/main?creator=${data.creatorData.username}`)
+    }, [navigateToMainSearch])
+
+    /**Обработка нажатия на исполнителя задачи*/
     const handlePerformerClick = useCallback(() => {
-        navigateToMainSearch(`/main?performer=${data.performer.username}`)
+        navigateToMainSearch(`/main?performer=${data.performerData.username}`)
     }, [navigateToMainSearch])
     
     /**Обработка состояния модального окна*/
-    const handleModalToggle = () => {
+    const handleModalToggle = useCallback(() => {
         setModalOpen((prev) => !prev)
-    }
+    }, [setModalOpen])
     
     return (
         <div className={styles.info}>
@@ -42,12 +43,12 @@ export const TicketInfo = memo<Props>(({
                     <div className={styles.item}>{data.date.toLocaleDateString()}</div>
                     <div className={styles.item}>
                         <div className={styles.text}>Задачу добавил</div>
-                        <div onClick={handleCreatorClick} className={styles.link}>{data.creator.username}</div>
+                        <div onClick={handleCreatorClick} className={styles.link}>{data.creatorData.username}</div>
                     </div>
-                    {data.performer.username !== '' && (
+                    {data.performerData.username !== '' && (
                         <div className={styles.item}>
                             <div className={styles.text}>Выполняет</div>
-                            <div onClick={handlePerformerClick} className={styles.link}>{data.performer.username}</div>
+                            <div onClick={handlePerformerClick} className={styles.link}>{data.performerData.username}</div>
                         </div>
                     )}
                 </div>
@@ -68,7 +69,7 @@ export const TicketInfo = memo<Props>(({
 
             {isModalOpen && (
                 <EditTicketModal
-                    onClick={handleModalToggle}
+                    closeModal={handleModalToggle}
                     data={data}
                 />
             )}

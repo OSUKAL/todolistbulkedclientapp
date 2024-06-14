@@ -15,11 +15,11 @@ export const TicketPage = memo(() => {
         id: '12345',
         name: 'Сверстать экран инфо о задаче',
         number: 'РК-20240605001954',
-        creator: {
+        creatorData: {
             id: 'ZUVUYER',
             username: 'ZUVUYER'
         },
-        performer: {
+        performerData: {
             id: 'XxX_BlackKamaro_XxX',
             username: 'XxX_BlackKamaro_XxX'
         },

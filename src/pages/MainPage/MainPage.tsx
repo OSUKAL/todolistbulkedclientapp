@@ -15,11 +15,11 @@ export const MainPage = memo(() => {
             id: '1',
             name: 'Сверстать экранd safas dfsadfsadasdasda asdasdasd asdasda adadasdawdac adasdasdafg dfsdf',
             number: 'РК-20240605001954',
-            creator: {
+            creatorData: {
                 id: 'ZUVUYER',
                 username: 'ZUVUYER'
             },
-            performer: {
+            performerData: {
                 id: 'XxX_BlackKamaro_XxX',
                 username: 'XxX_BlackKamaro_XxX'
             },

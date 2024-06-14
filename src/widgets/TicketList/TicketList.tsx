@@ -19,36 +19,38 @@ export const TicketList = memo<Props>(({
     const [searchValue, setSearchValue] = useState('')
     const [isModalOpen, setModalOpen] = useState(false)
     const [searchParams] = useSearchParams()
-    
+
+    /**Обработка query параметров*/
     const handleSearchParams = useCallback(() => {
         const params = searchParams.get('creator') || searchParams.get('performer')
         if(params === null)
             return
-        
+
         setSearchValue(params)
-    }, [])
+    }, [searchParams, setSearchValue])
     
     useEffect(() => {
         handleSearchParams()
         
         return () => {
-            setSearchValue('')
+            setSearchValue('') // Возможно, лишнее
         }
-    }, [])
-
-    /**Обработка состояния модального окна*/
+    }, [handleSearchParams, setSearchValue])
+    
+    /**Обработка изменения состояния модального окна*/
     const handleModalToggle = useCallback(() => {
         setModalOpen((prev) => !prev)
     }, [setModalOpen])
 
+    /**Обработка нажатия на кнопку сброса поля ввода для поиска*/
     const handleClearClick = useCallback(() => {
         setSearchValue('')
     }, [setSearchValue])
 
+    /**Обработка изменения поля ввода для поиска*/
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>)=> {
         setSearchValue(event.target.value)
-        console.log(searchValue)
-    },[searchValue, setSearchValue])
+    },[setSearchValue])
     
     return (
         <div className={styles.base}>
@@ -86,7 +88,7 @@ export const TicketList = memo<Props>(({
 
             {isModalOpen && (
                 <CreateTicketModal
-                    onClick={handleModalToggle}
+                    closeModal={handleModalToggle}
                 />
             )}
         </div>

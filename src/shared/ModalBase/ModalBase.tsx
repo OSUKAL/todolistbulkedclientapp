@@ -2,8 +2,8 @@
 import styles from './ModalBase.module.scss'
 
 type Props = {
-    /**Закрытие модального окна*/
-    close: () => void
+    /**Обработка закрытия модального окна*/
+    closeModal: () => void
 }
 
 /**
@@ -11,15 +11,14 @@ type Props = {
  */
 export const ModalBase = memo<PropsWithChildren<Props>>(({
     children,
-    close
+    closeModal
 }) => {
-    const contentRef = useRef<any>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
 
     /**Обработка нажатия вне содержимого модального окна*/
     const handleClickOutside = (event: MouseEvent) => {
         if(event.target instanceof Node && contentRef.current && !contentRef.current.contains(event.target)){
-            console.log('Клик вне контента')
-            close()
+            closeModal()
         }
     }
 
@@ -29,12 +28,15 @@ export const ModalBase = memo<PropsWithChildren<Props>>(({
         return () => {
             window.removeEventListener('click', handleClickOutside)
         }
-    }, [close, handleClickOutside])
+    }, [closeModal, handleClickOutside])
     
     return (
         <div className={styles.modal}>
             {/*Тег для работы закрытия по клику вне содержимого модального окна*/}
-            <div className={styles.content} ref={contentRef}>
+            <div 
+                className={styles.content} 
+                ref={contentRef}
+            >
                 {children}
             </div>
         </div>

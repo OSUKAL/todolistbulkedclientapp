@@ -14,9 +14,9 @@ export type TicketModel = {
     /**Дата создания*/
     date: Date
     /**Данные создателя*/
-    creator: TicketUserModel
+    creatorData: TicketUserModel
     /**Данные исполнителя*/
-    performer: TicketUserModel
+    performerData: TicketUserModel
     /**Тип*/
     type: TicketType
     /**Состояние*/

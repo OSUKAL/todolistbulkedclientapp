@@ -3,21 +3,23 @@ import { ModalBase } from '../../../../shared/ModalBase/ModalBase.tsx'
 import { TicketForm } from '../../../Forms/Ticket/TicketForm.tsx'
 
 type Props = {
-    /**Обработка нажатия*/
-    onClick: () => void
+    /**Обработка закрытия модального окна*/
+    closeModal: () => void
 }
 
 /**
  * Модальное окно создания задачи
  */
 export const CreateTicketModal = memo<Props>(({
-    onClick
+    closeModal
 }) => {
     return (
-        <ModalBase close={onClick}>
+        <ModalBase closeModal={closeModal}>
             <TicketForm
-                onClick={onClick}
-                formHeader={'Добавление задачи'}/>
+                onClick={closeModal}
+                formHeader={'Добавление задачи'}
+                buttonName={'Создать'}
+            />
         </ModalBase>
     )
 })

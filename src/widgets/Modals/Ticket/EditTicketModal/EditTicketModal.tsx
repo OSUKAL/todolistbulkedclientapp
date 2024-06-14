@@ -4,8 +4,8 @@ import type { TicketModel } from '../../../../models/Ticket/TicketModel.ts'
 import { TicketForm } from '../../../Forms/Ticket/TicketForm.tsx'
 
 type Props = {
-    /**Обработка нажатия*/
-    onClick: () => void
+    /**Обработка закрытия модального окна*/
+    closeModal: () => void
     /**Данные задачи*/
     data: TicketModel
 }
@@ -15,14 +15,15 @@ type Props = {
  */
 export const EditTicketModal = memo<Props>(({
     data,
-    onClick
+    closeModal
 }) => {
     return (
-        <ModalBase close={onClick}>
+        <ModalBase closeModal={closeModal}>
             <TicketForm 
-                onClick={onClick} 
+                onClick={closeModal} 
                 data={data}
                 formHeader={'Редактирование задачи'}
+                buttonName={'Подтвердить'}
             />
         </ModalBase>
     )

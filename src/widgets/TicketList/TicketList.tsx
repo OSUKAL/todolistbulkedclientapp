@@ -1,4 +1,4 @@
-﻿import { memo, useState } from 'react'
+﻿import React, { memo, useCallback, useEffect, useState } from 'react'
 import styles from './TicketList.module.scss'
 import { TicketCard } from '../../shared/TicketCard/TicketCard.tsx'
 import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
@@ -16,37 +16,62 @@ type Props = {
 export const TicketList = memo<Props>(({
     data
 }) => {
+    const [searchValue, setSearchValue] = useState('')
     const [isModalOpen, setModalOpen] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     
-    const getUsername = () => {
-        const username = searchParams.get('creator') || searchParams.get('performer') || ''
-        setSearchParams('')
+    const handleSearchParams = useCallback(() => {
+        const params = searchParams.get('creator') || searchParams.get('performer')
+        if(params === null)
+            return
         
-        return username
-    }
+        setSearchValue(params)
+    }, [])
     
-    const userToSearchBy = getUsername()
-    
+    useEffect(() => {
+        handleSearchParams()
+        
+        return () => {
+            setSearchValue('')
+        }
+    }, [])
+
     /**Обработка состояния модального окна*/
-    const handleModalToggle = () => {
+    const handleModalToggle = useCallback(() => {
         setModalOpen((prev) => !prev)
-    }
+    }, [setModalOpen])
+
+    const handleClearClick = useCallback(() => {
+        setSearchValue('')
+    }, [setSearchValue])
+
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>)=> {
+        setSearchValue(event.target.value)
+        console.log(searchValue)
+    },[searchValue, setSearchValue])
     
     return (
         <div className={styles.base}>
             <div className={styles.header}>
                 <div className={styles.title}>Все задачи</div>
-                <Button 
+                <Button
                     onClick={handleModalToggle}
                     title={'Создать задачу'}
                 />
             </div>
             <div className={styles.search}>
                 <div className={styles.item}>
-                    <Input initValue={userToSearchBy} placeholder={'Поиск по создателю, исполнителю, задаче'} type={'text'}/>
+                    <Input
+                        onChange={handleChange}
+                        initValue={searchValue}
+                        placeholder={'Поиск по создателю, исполнителю, задаче'}
+                        type={'text'}
+                    />
                 </div>
-                <Button onClick={() => {}} title={'Сброс'}/>
+                <Button
+                    onClick={handleClearClick}
+                    title={'Сброс'}
+                />
             </div>
             <div className={styles.scroll}>
                 <div className={styles.list}>

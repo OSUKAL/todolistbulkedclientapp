@@ -4,7 +4,7 @@ import { Input } from '../../../../shared/CustomInput/CustomInput.tsx'
 import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
 import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 import { UserRole } from '../../../../Enums/UserRole.ts'
-import type { NamedUserRole } from '../../Models/NamedUserRole.ts'
+import type { NamedUserRole } from '../../../../Enums/NamedEnums/NamedUserRole.ts'
 import type { CreateUserModel } from '../../../../models/User/CreateUserModel.ts'
 
 const roles: NamedUserRole[] = [

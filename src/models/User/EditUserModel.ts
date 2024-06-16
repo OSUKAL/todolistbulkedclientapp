@@ -4,8 +4,8 @@
 export type EditUserModel = {
     /**Идентификатор*/
     id:string
-    /**Имя пользователя*/
-    username: string
     /**Роль*/
     role: UserRole
+    /**Имя пользователя*/
+    username: string
 }

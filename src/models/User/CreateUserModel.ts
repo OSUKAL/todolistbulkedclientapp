@@ -4,8 +4,8 @@
 export type CreateUserModel = {
     /**Имя пользователя*/
     username: string
-    /**Пароль*/
-    password: string
     /**Роль*/
     role: UserRole
+    /**Пароль*/
+    password: string
 }

@@ -1,12 +1,12 @@
 ﻿import { memo } from 'react'
 import styles from './Labels.module.scss'
 import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
-import type { NamedTicketPriority } from '../../widgets/Forms/Models/NamedTicketPriority.ts'
 import { TicketPriority } from '../../Enums/TicketPriority.ts'
-import type { NamedTicketState } from '../../widgets/Forms/Models/NamedTicketState.ts'
 import { TicketState } from '../../Enums/TicketState.ts'
-import type { NamedTicketType } from '../../widgets/Forms/Models/NamedTicketType.ts'
 import { TicketType } from '../../Enums/TicketType.ts'
+import type { NamedTicketPriority } from '../../Enums/NamedEnums/NamedTicketPriority.ts'
+import type { NamedTicketState } from '../../Enums/NamedEnums/NamedTicketState.ts'
+import type { NamedTicketType } from '../../Enums/NamedEnums/NamedTicketType.ts'
 
 type Props = {
     /**Данные задачи*/

@@ -1,4 +1,4 @@
-﻿import { TicketPriority } from '../../../Enums/TicketPriority.ts'
+﻿import { TicketPriority } from '../TicketPriority.ts'
 
 export type NamedTicketPriority = {
     name: string

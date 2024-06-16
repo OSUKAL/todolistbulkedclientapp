@@ -1,4 +1,4 @@
-﻿import { UserRole } from '../../../Enums/UserRole.ts'
+﻿import { UserRole } from '../UserRole.ts'
 
 export type NamedUserRole = {
     name: string

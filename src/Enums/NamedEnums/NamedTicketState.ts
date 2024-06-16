@@ -1,4 +1,4 @@
-﻿import { TicketState } from '../../../Enums/TicketState.ts'
+﻿import { TicketState } from '../TicketState.ts'
 
 export type NamedTicketState = {
     name: string

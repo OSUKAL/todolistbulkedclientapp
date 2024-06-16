@@ -22,10 +22,10 @@ export const TicketCard = memo<Props>(({
                 <Labels data={data}/>
             </div>
 
-            {data.performerData.username !== '' && (
+            {data.performer.username !== '' && (
                 <div className={styles.performer}>
                     Выполняет
-                    <div className={styles.text}>{data.performerData.username}</div>
+                    <div className={styles.text}>{data.performer.username}</div>
                 </div>
             )}
         </div>

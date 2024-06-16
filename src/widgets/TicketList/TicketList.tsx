@@ -1,11 +1,11 @@
 ﻿import React, { memo, useCallback, useEffect, useState } from 'react'
 import styles from './TicketList.module.scss'
 import { TicketCard } from '../../shared/TicketCard/TicketCard.tsx'
-import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 import { Button } from '../../shared/CustomButton/CustomButton.tsx'
 import { Input } from '../../shared/CustomInput/CustomInput.tsx'
 import { CreateTicketModal } from '../Modals/Ticket/CreateTIcketModal/CreateTicketModal.tsx'
 import { useSearchParams } from 'react-router-dom'
+import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 
 type Props = {
     /**Список данных задач*/

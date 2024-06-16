@@ -1,10 +1,11 @@
 ﻿import { memo, useCallback, useState } from 'react'
 import styles from './TicketInfo.module.scss'
-import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 import { Button } from '../../shared/CustomButton/CustomButton.tsx'
 import {EditTicketModal} from '../Modals/Ticket/EditTicketModal/EditTicketModal.tsx'
 import { Labels } from '../../shared/Labels/Labels.tsx'
 import { useNavigate } from 'react-router-dom'
+import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
+
 
 type Props = {
     /**Данные задачи*/
@@ -22,12 +23,12 @@ export const TicketInfo = memo<Props>(({
 
     /**Обработка нажатия на создателя задачи*/
     const handleCreatorClick = useCallback(() => {
-        navigateToMainSearch(`/main?creator=${data.creatorData.username}`)
+        navigateToMainSearch(`/main?creator=${data.creator.username}`)
     }, [navigateToMainSearch])
 
     /**Обработка нажатия на исполнителя задачи*/
     const handlePerformerClick = useCallback(() => {
-        navigateToMainSearch(`/main?performer=${data.performerData.username}`)
+        navigateToMainSearch(`/main?performer=${data.performer.username}`)
     }, [navigateToMainSearch])
     
     /**Обработка состояния модального окна*/
@@ -43,12 +44,12 @@ export const TicketInfo = memo<Props>(({
                     <div className={styles.item}>{data.date.toLocaleDateString()}</div>
                     <div className={styles.item}>
                         <div className={styles.text}>Задачу добавил</div>
-                        <div onClick={handleCreatorClick} className={styles.link}>{data.creatorData.username}</div>
+                        <div onClick={handleCreatorClick} className={styles.link}>{data.creator.username}</div>
                     </div>
-                    {data.performerData.username !== '' && (
+                    {data.performer.username !== '' && (
                         <div className={styles.item}>
                             <div className={styles.text}>Выполняет</div>
-                            <div onClick={handlePerformerClick} className={styles.link}>{data.performerData.username}</div>
+                            <div onClick={handlePerformerClick} className={styles.link}>{data.performer.username}</div>
                         </div>
                     )}
                 </div>

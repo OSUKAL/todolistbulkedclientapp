@@ -6,12 +6,12 @@ import styles from './TicketForm.module.scss'
 import { Button } from '../../../shared/CustomButton/CustomButton.tsx'
 import { Textarea } from '../../../shared/СustomTextarea/CustomTextarea.tsx'
 import type { TicketModel } from '../../../models/Ticket/TicketModel.ts'
-import { NamedTicketPriority } from '../Models/NamedTicketPriority.ts'
 import { TicketPriority } from '../../../Enums/TicketPriority.ts'
-import { NamedTicketState } from '../Models/NamedTicketState.ts'
 import { TicketState } from '../../../Enums/TicketState.ts'
-import { NamedTicketType } from '../Models/NamedTicketType.ts'
 import { TicketType } from '../../../Enums/TicketType.ts'
+import type { NamedTicketPriority } from '../../../Enums/NamedEnums/NamedTicketPriority.ts'
+import type { NamedTicketState } from '../../../Enums/NamedEnums/NamedTicketState.ts'
+import type { NamedTicketType } from '../../../Enums/NamedEnums/NamedTicketType.ts'
 
 const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -75,7 +75,7 @@ export const TicketForm = memo<Props>(({
         if(data === undefined || performerRef.current === null || descriptionRef.current === null)
             return 
         
-        performerRef.current.value = data.performerData.username
+        performerRef.current.value = data.performer.username
         descriptionRef.current.value = data.description
         
         return () => {} //Возможно, чего-то нехватает

@@ -19,7 +19,8 @@ export const EditTicketModal = memo<Props>(({
 }) => {
     return (
         <ModalBase closeModal={closeModal}>
-            <TicketForm 
+            <TicketForm
+                formType={'edit'}
                 onClick={closeModal} 
                 data={data}
                 formHeader={'Редактирование задачи'}

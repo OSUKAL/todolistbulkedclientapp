@@ -1,6 +1,6 @@
 ﻿import { memo } from 'react'
 import { BasePage } from '../../shared/BasePage/BasePage.tsx'
-import { TicketList } from '../../widgets/TicketList/TicketList.tsx'
+import { List } from '../../widgets/List/List.tsx'
 import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
 import { TicketState } from '../../Enums/TicketState.ts'
 import { TicketType } from '../../Enums/TicketType.ts'
@@ -28,12 +28,50 @@ export const MainPage = memo(() => {
             state: TicketState.InProgress,
             type: TicketType.Development,
             priority: TicketPriority.High
+        },
+        {
+            id: '2',
+            name: 'Сверстать экранd',
+            number: 'РК-20240605001954',
+            creator: {
+                id: 'ZUVUYER',
+                username: 'ZUVUYER'
+            },
+            performer: {
+                id: 'XxX_BlackKamaro_XxX',
+                username: 'Antos'
+            },
+            date: new Date(),
+            description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
+            state: TicketState.InProgress,
+            type: TicketType.Development,
+            priority: TicketPriority.High
+        },
+        {
+            id: '3',
+            name: 'Сверстать экран safas',
+            number: 'РК-20240605001954',
+            creator: {
+                id: 'ZUVUYER',
+                username: 'ZUVUYER'
+            },
+            performer: {
+                id: 'XxX_BlackKamaro_XxX',
+                username: 'ZUVUYER'
+            },
+            date: new Date(),
+            description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
+            state: TicketState.InProgress,
+            type: TicketType.Development,
+            priority: TicketPriority.High
         }
     ]
 
     return (
         <BasePage>
-            <TicketList data={tickets}/>
+            <List 
+                data={tickets}
+            />
         </BasePage>
     )
 })

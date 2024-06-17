@@ -44,9 +44,18 @@
     flex-wrap: wrap;
     justify-content: flex-end;
 
+    font-weight: bold;
+
     .text{
       margin-left: 1rem;
-      font-weight: bold;
+      transition: color .1s linear;
+      font-weight: normal;
+      
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(100, 108, 255);
+      }
     }
   }
 }

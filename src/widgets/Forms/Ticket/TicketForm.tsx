@@ -12,6 +12,7 @@ import { TicketType } from '../../../Enums/TicketType.ts'
 import type { NamedTicketPriority } from '../../../Enums/NamedEnums/NamedTicketPriority.ts'
 import type { NamedTicketState } from '../../../Enums/NamedEnums/NamedTicketState.ts'
 import type { NamedTicketType } from '../../../Enums/NamedEnums/NamedTicketType.ts'
+import { CreateTicketModel } from '../../../models/Ticket/CreateTicketModel.ts'
 
 const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -54,12 +55,15 @@ type Props = {
     formHeader: string
     /**Название кнопки*/
     buttonName: string
+    /**Тип формы*/
+    formType: string
 }
 
 /**
  * Форма редактирования задачи
  */
 export const TicketForm = memo<Props>(({
+    formType,
     buttonName,
     data,
     onClick,
@@ -68,13 +72,15 @@ export const TicketForm = memo<Props>(({
     const [priority, setPriority] = useState(data?.priority ?? TicketPriority.Unknown)
     const [state, setState] = useState(data?.state ?? TicketState.Unknown)
     const [type, setType] = useState(data?.type ?? TicketType.Unknown)
+    const nameRef = useRef<HTMLInputElement>(null)
     const performerRef = useRef<HTMLInputElement>(null)
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
-        if(data === undefined || performerRef.current === null || descriptionRef.current === null)
+        if(data === undefined || performerRef.current === null || descriptionRef.current === null || nameRef.current === null)
             return 
         
+        nameRef.current.value = data.name
         performerRef.current.value = data.performer.username
         descriptionRef.current.value = data.description
         
@@ -83,6 +89,10 @@ export const TicketForm = memo<Props>(({
     
     /**Обработка нажатия на кнопку формы*/
     const handleButtonClick = useCallback(() => {
+        if(nameRef.current === null || nameRef.current.value === ''){
+            console.log('Название задачи не указано')
+            return
+        }
         if(performerRef.current === null || performerRef.current.value === ''){
             console.log('Исполнитель задачи не назначен')
             return
@@ -92,9 +102,15 @@ export const TicketForm = memo<Props>(({
             return
         }
         
-        const ticketData: TicketModel = {
-            
+        const ticketData: CreateTicketModel = {
+            name: nameRef.current.value,
+            type: type,
+            priority: priority,
+            description: descriptionRef.current.value
         }
+        
+        onClick()
+        console.log(ticketData)
         
     }, [onClick, performerRef, descriptionRef])
 
@@ -131,16 +147,22 @@ export const TicketForm = memo<Props>(({
                 </div>
                 <div className={styles.selects}>
                     <Input 
+                        inputRef={nameRef}
+                        placeholder={'Укажите название задачи'}
+                        type={'text'}
+                    />
+                    <Input 
                         inputRef={performerRef}
-                        onChange={() => {}}
                         placeholder={'Укажите исполнителя'}
                         type={'text'}
                     />
-                    <Select<TicketState>
-                        selected={selectedState}
-                        options={states}
-                        onClick={handleStateSelect}
-                    />
+                    {formType === 'edit' && (
+                        <Select<TicketState>
+                            selected={selectedState}
+                            options={states}
+                            onClick={handleStateSelect}
+                        />
+                    )}
                     <Select<TicketType>
                         selected={selectedType}
                         options={types}
@@ -152,7 +174,7 @@ export const TicketForm = memo<Props>(({
                         onClick={handlePrioritySelect}
                     />
                     <Button
-                        onClick={onClick}
+                        onClick={handleButtonClick}
                         title={buttonName}
                     />
                 </div>

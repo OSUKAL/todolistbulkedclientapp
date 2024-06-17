@@ -1,5 +1,5 @@
 ﻿import React, { memo, useCallback, useEffect, useState } from 'react'
-import styles from './TicketList.module.scss'
+import styles from './List.module.scss'
 import { TicketCard } from '../../shared/TicketCard/TicketCard.tsx'
 import { Button } from '../../shared/CustomButton/CustomButton.tsx'
 import { Input } from '../../shared/CustomInput/CustomInput.tsx'
@@ -13,7 +13,7 @@ type Props = {
 }
 
 /**Список задач*/
-export const TicketList = memo<Props>(({
+export const List = memo<Props>(({
     data
 }) => {
     const [searchValue, setSearchValue] = useState('')
@@ -33,7 +33,7 @@ export const TicketList = memo<Props>(({
         handleSearchParams()
         
         return () => {
-            setSearchValue('') // Возможно, лишнее
+            setSearchValue('')// Возможно, лишнее
         }
     }, [handleSearchParams, setSearchValue])
     
@@ -51,6 +51,10 @@ export const TicketList = memo<Props>(({
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>)=> {
         setSearchValue(event.target.value)
     },[setSearchValue])
+    
+    const handleCardClick = useCallback((data: TicketModel) => {
+        setSearchValue(data.performer.username)
+    }, [setSearchValue])
     
     return (
         <div className={styles.base}>
@@ -79,6 +83,7 @@ export const TicketList = memo<Props>(({
                 <div className={styles.list}>
                     {data.map((item) => (
                         <TicketCard
+                            performerClick={handleCardClick}
                             key={item.id}
                             data={item}
                         />

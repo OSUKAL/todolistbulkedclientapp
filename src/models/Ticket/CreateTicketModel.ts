@@ -8,7 +8,7 @@ export type CreateTicketModel = {
     /**Тип*/
     type: TicketType,
     /**Идентификатор исполнителя*/
-    performerId: string,
+    performerId?: string,
     /**Приоритет*/
     priority: TicketPriority,
     /**Описание*/

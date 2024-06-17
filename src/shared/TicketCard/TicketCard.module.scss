@@ -23,6 +23,13 @@
       margin-bottom: 1rem;
       font-size: 1.6rem;
       line-height: 1.2;
+      transition: color .1s linear;
+
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(100, 108, 255);
+      }
     }
     
     .title{
@@ -48,8 +55,8 @@
 
     .text{
       margin-left: 1rem;
-      transition: color .1s linear;
       font-weight: normal;
+      transition: color .1s linear;
       
       cursor: pointer;
 

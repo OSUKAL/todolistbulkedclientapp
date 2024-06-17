@@ -142,7 +142,7 @@ export const TicketForm = memo<Props>(({
                 <div className={styles.textarea}>
                     <Textarea 
                         textareaRef={descriptionRef}
-                        placeholder={'Описание задачи'}
+                        placeholder={'Укажите описание задачи'}
                     />
                 </div>
                 <div className={styles.selects}>

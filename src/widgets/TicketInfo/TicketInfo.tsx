@@ -1,34 +1,28 @@
 ﻿import { memo, useCallback, useState } from 'react'
 import styles from './TicketInfo.module.scss'
 import { Button } from '../../shared/CustomButton/CustomButton.tsx'
-import {EditTicketModal} from '../Modals/Ticket/EditTicketModal/EditTicketModal.tsx'
+import { EditTicketModal } from '../Modals/Ticket/EditTicketModal/EditTicketModal.tsx'
 import { Labels } from '../../shared/Labels/Labels.tsx'
-import { useNavigate } from 'react-router-dom'
-import type { TicketModel } from '../../models/Ticket/TicketModel.ts'
-
-
-type Props = {
-    /**Данные задачи*/
-    data: TicketModel
-}
+import { useLocation, useNavigate } from 'react-router-dom'
 
 /**
  * Информация о задаче
  */
-export const TicketInfo = memo<Props>(({
-    data
-}) => {
-    const[isModalOpen, setModalOpen] = useState(false)
+export const TicketInfo = memo(() => {
+    const [isModalOpen, setModalOpen] = useState(false)
     const navigateToMainSearch = useNavigate()
+    const location = useLocation()
+    
+    const ticket = location.state
 
     /**Обработка нажатия на создателя задачи*/
     const handleCreatorClick = useCallback(() => {
-        navigateToMainSearch(`/main?creator=${data.creator.username}`)
+        navigateToMainSearch(`/main?creator=${ticket.creator.username}`)
     }, [navigateToMainSearch])
 
     /**Обработка нажатия на исполнителя задачи*/
     const handlePerformerClick = useCallback(() => {
-        navigateToMainSearch(`/main?performer=${data.performer.username}`)
+        navigateToMainSearch(`/main?performer=${ticket.performer.username}`)
     }, [navigateToMainSearch])
     
     /**Обработка состояния модального окна*/
@@ -40,25 +34,25 @@ export const TicketInfo = memo<Props>(({
         <div className={styles.info}>
             <div className={styles.header}>
                 <div className={styles.creation}>
-                    <div className={styles.item}>{data.number}</div>
-                    <div className={styles.item}>{data.date.toLocaleDateString()}</div>
+                    <div className={styles.item}>{ticket.number}</div>
+                    <div className={styles.item}>{ticket.date.toLocaleDateString()}</div>
                     <div className={styles.item}>
                         <div className={styles.text}>Задачу добавил</div>
-                        <div onClick={handleCreatorClick} className={styles.link}>{data.creator.username}</div>
+                        <div onClick={handleCreatorClick} className={styles.link}>{ticket.creator.username}</div>
                     </div>
-                    {data.performer.username !== '' && (
+                    {ticket.performer.username !== '' && (
                         <div className={styles.item}>
                             <div className={styles.text}>Выполняет</div>
-                            <div onClick={handlePerformerClick} className={styles.link}>{data.performer.username}</div>
+                            <div onClick={handlePerformerClick} className={styles.link}>{ticket.performer.username}</div>
                         </div>
                     )}
                 </div>
-                <div className={styles.title}>{data.name}</div>
-                <Labels data={data}/>
+                <div className={styles.title}>{ticket.name}</div>
+                <Labels data={location.state}/>
             </div>
 
             <div className={styles.description}>
-                {data.description}
+                {ticket.description}
             </div>
 
             <div className={styles.edit}>
@@ -71,7 +65,7 @@ export const TicketInfo = memo<Props>(({
             {isModalOpen && (
                 <EditTicketModal
                     closeModal={handleModalToggle}
-                    data={data}
+                    data={ticket}
                 />
             )}
         </div>

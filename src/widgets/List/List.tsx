@@ -19,7 +19,7 @@ export const List = memo<Props>(({
     const [searchValue, setSearchValue] = useState('')
     const [isModalOpen, setModalOpen] = useState(false)
     const [searchParams] = useSearchParams()
-
+    
     /**Обработка query параметров*/
     const handleSearchParams = useCallback(() => {
         const params = searchParams.get('creator') || searchParams.get('performer')
@@ -52,8 +52,9 @@ export const List = memo<Props>(({
         setSearchValue(event.target.value)
     },[setSearchValue])
     
-    const handleCardClick = useCallback((data: TicketModel) => {
-        setSearchValue(data.performer.username)
+    /**Обработка нажатия на исполнителя задачи*/
+    const handlePerformerClick = useCallback((name: string) => {
+        setSearchValue(name)
     }, [setSearchValue])
     
     return (
@@ -81,11 +82,11 @@ export const List = memo<Props>(({
             </div>
             <div className={styles.scroll}>
                 <div className={styles.list}>
-                    {data.map((item) => (
+                    {data.map((ticket) => (
                         <TicketCard
-                            performerClick={handleCardClick}
-                            key={item.id}
-                            data={item}
+                            performerClick={handlePerformerClick}
+                            key={ticket.id}
+                            data={ticket}
                         />
                     ))}
                 </div>

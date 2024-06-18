@@ -59,9 +59,7 @@ type Props = {
     formType: string
 }
 
-/**
- * Форма редактирования задачи
- */
+/**Форма редактирования задачи*/
 export const TicketForm = memo<Props>(({
     formType,
     buttonName,
@@ -77,57 +75,57 @@ export const TicketForm = memo<Props>(({
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
-        if(data === undefined || performerRef.current === null || descriptionRef.current === null || nameRef.current === null)
+        if(!data)
             return 
         
-        nameRef.current.value = data.name
-        performerRef.current.value = data.performer.username
-        descriptionRef.current.value = data.description
+        nameRef.current!.value = data.name
+        performerRef.current!.value = data.performer.username
+        descriptionRef.current!.value = data.description
         
-        return () => {} //Возможно, чего-то нехватает
-    }, [descriptionRef, performerRef])
+        return () => {}
+    }, [descriptionRef, performerRef, nameRef, data])
     
     /**Обработка нажатия на кнопку формы*/
     const handleButtonClick = useCallback(() => {
-        if(nameRef.current === null || nameRef.current.value === ''){
+        if(nameRef.current!.value === ''){
             console.log('Название задачи не указано')
             return
         }
-        if(performerRef.current === null || performerRef.current.value === ''){
+        if(performerRef.current!.value === ''){
             console.log('Исполнитель задачи не назначен')
             return
         }
-        if(descriptionRef.current === null || descriptionRef.current.value === ''){
+        if(descriptionRef.current!.value === ''){
             console.log('Отсутствует описание задачи')
             return
         }
         
         const ticketData: CreateTicketModel = {
-            name: nameRef.current.value,
+            name: nameRef.current!.value,
             type: type,
             priority: priority,
-            description: descriptionRef.current.value
+            description: descriptionRef.current!.value
         }
         
         onClick()
         console.log(ticketData)
         
-    }, [onClick, performerRef, descriptionRef])
+    }, [onClick, type, priority, nameRef, performerRef, descriptionRef])
 
     /**Обработка выбора приоритета задачи*/
     const handlePrioritySelect = useCallback((value: TicketPriority) => {
         setPriority(value)
-    }, [])
+    }, [setPriority])
     
     /**Обработка выбора состояния задачи*/
     const handleStateSelect = useCallback((value: TicketState) => {
         setState(value)
-    }, [])
+    }, [setState])
     
     /**Обработка выбора типа задачи*/
     const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
-    }, [])
+    }, [setType])
 
     const selectedPriority = priorities.find((item) => item.value === priority) ?? defaultPriority
     const selectedState = states.find((item) => item.value === state) ?? defaultState

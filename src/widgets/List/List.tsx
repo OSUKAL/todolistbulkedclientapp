@@ -12,7 +12,7 @@ type Props = {
     data: TicketModel[]
 }
 
-/**Список задач*/
+/**Компонент списка с поиском и скроллом*/
 export const List = memo<Props>(({
     data
 }) => {
@@ -84,7 +84,7 @@ export const List = memo<Props>(({
                 <div className={styles.list}>
                     {data.map((ticket) => (
                         <TicketCard
-                            performerClick={handlePerformerClick}
+                            onPerformerClick={handlePerformerClick}
                             key={ticket.id}
                             data={ticket}
                         />

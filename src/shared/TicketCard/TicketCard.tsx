@@ -8,27 +8,25 @@ type Props = {
     /**Данные задачи*/
     data: TicketModel
     /**Обработка нажатия на исполнителя задачи*/
-    performerClick: (name: string) => void
+    onPerformerClick: (name: string) => void
 }
 
-/**
- * Карточка задачи
- */
+/**Карточка задачи*/
 export const TicketCard = memo<Props>(({
     data,
-    performerClick
+    onPerformerClick
 }) => {
-    const navigateToTask = useNavigate()
+    const navigate = useNavigate()
     
     /**Обработка нажатия на исполнителя задачи*/
     const handlePerformerClick = useCallback(() => {
-        performerClick(data.performer.username)
-    }, [performerClick])
+        onPerformerClick(data.performer.username)
+    }, [onPerformerClick, data])
     
     /**Обработка нажатия на номер задачи*/
     const handleNumberClick = useCallback(() => {
-        navigateToTask(`/task?id=${data.id}`, {state: data})
-    }, [navigateToTask])
+        navigate(`/task?id=${data.id}`, {state: data})
+    }, [navigate, data])
     
     return (
         <div className={styles.card}>
@@ -39,7 +37,12 @@ export const TicketCard = memo<Props>(({
                 >
                     {data.number}
                 </div>
-                <div title={data.name} className={styles.title}>{data.name}</div>
+                <div 
+                    title={data.name}
+                    className={styles.title}
+                >
+                    {data.name}
+                </div>
                 <Labels data={data}/>
             </div>
 

@@ -1,16 +1,14 @@
 ﻿import { BasePage } from '../../shared/BasePage/BasePage.tsx'
 import { memo } from 'react'
 import { Container } from '../../shared/Container/Container.tsx'
-import { Content } from '../../shared/Content/Content.tsx'
+import styles from './AuthPage.module.scss'
 import { CreateUserForm } from '../../widgets/Forms/Auth/CreateUserForm/CreateUserForm.tsx'
 import { LoginForm } from '../../widgets/Forms/Auth/LoginForm/LoginForm.tsx'
 import { EditUserForm } from '../../widgets/Forms/Auth/EditUserForm/EditUserForm.tsx'
 import type { UserModel } from '../../models/User/UserModel.ts'
 import { UserRole } from '../../Enums/UserRole.ts'
 
-/**
- * Страница авторизации
- */
+/**Страница авторизации*/
 export const AuthPage = memo(() => {
     const user: UserModel = {
         id: '1',
@@ -21,13 +19,13 @@ export const AuthPage = memo(() => {
 
     return (
         <BasePage>
-            <Content>
+            <div className={styles.auth}>
                 <Container>
                     <CreateUserForm/>
                     <LoginForm/>
                     <EditUserForm data={user}/>
                 </Container>
-            </Content>
+            </div>
         </BasePage>
     )
 })

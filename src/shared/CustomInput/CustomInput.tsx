@@ -14,9 +14,7 @@ type Props = {
     inputRef?: React.RefObject<HTMLInputElement>
 }
 
-/**
- * Поле для ввода текста
- */
+/**Поле для ввода текста*/
 export const Input = memo<Props>(({
     inputRef,
     onChange,

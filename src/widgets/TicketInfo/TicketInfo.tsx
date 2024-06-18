@@ -5,9 +5,7 @@ import { EditTicketModal } from '../Modals/Ticket/EditTicketModal/EditTicketModa
 import { Labels } from '../../shared/Labels/Labels.tsx'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-/**
- * Информация о задаче
- */
+/**Информация о задаче*/
 export const TicketInfo = memo(() => {
     const [isModalOpen, setModalOpen] = useState(false)
     const navigateToMainSearch = useNavigate()
@@ -18,12 +16,12 @@ export const TicketInfo = memo(() => {
     /**Обработка нажатия на создателя задачи*/
     const handleCreatorClick = useCallback(() => {
         navigateToMainSearch(`/main?creator=${ticket.creator.username}`)
-    }, [navigateToMainSearch])
+    }, [navigateToMainSearch, ticket])
 
     /**Обработка нажатия на исполнителя задачи*/
     const handlePerformerClick = useCallback(() => {
         navigateToMainSearch(`/main?performer=${ticket.performer.username}`)
-    }, [navigateToMainSearch])
+    }, [navigateToMainSearch, ticket])
     
     /**Обработка состояния модального окна*/
     const handleModalToggle = useCallback(() => {
@@ -35,7 +33,7 @@ export const TicketInfo = memo(() => {
             <div className={styles.header}>
                 <div className={styles.creation}>
                     <div className={styles.item}>{ticket.number}</div>
-                    <div className={styles.item}>{ticket.date.toLocaleDateString()}</div>
+                    <div className={styles.item}>{ticket.creationDate.toLocaleDateString()}</div>
                     <div className={styles.item}>
                         <div className={styles.text}>Задачу добавил</div>
                         <div onClick={handleCreatorClick} className={styles.link}>{ticket.creator.username}</div>

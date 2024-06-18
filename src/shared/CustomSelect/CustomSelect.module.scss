@@ -47,19 +47,9 @@
     transform: translate3d(-1.3rem, 50%, 0) rotateZ(45deg);
   }
 
-  //&:{
-  //  .arrow{
-  //    right: 0;
-  //    top: 0;
-  //    transform: translate3d(-1.3rem, 125%, 0) rotateZ(-135deg);
-  //  }
-  //}
-  
   .placeholder{
     padding: .5rem 4rem;
   }
-  
-  
   
   &:hover {
     border-color: rgb(77, 84, 197);

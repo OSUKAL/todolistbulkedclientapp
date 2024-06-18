@@ -1,9 +1,7 @@
 ﻿import { memo, PropsWithChildren } from 'react'
 import styles from './Container.module.scss'
 
-/**
- * Контейнер для ограничения минимальной ширины контента
- */
+/**Контейнер для ограничения минимальной ширины контента*/
 export const Container = memo<PropsWithChildren>(({ 
     children 
 }) => {

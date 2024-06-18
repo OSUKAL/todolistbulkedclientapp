@@ -12,9 +12,7 @@ type Props = {
     textareaRef?: React.RefObject<HTMLTextAreaElement>
 }
 
-/**
- * Поле для ввода многострочного текста
- */
+/**Поле для ввода многострочного текста*/
 export const Textarea = memo<Props>(({
     textareaRef,
     initValue,

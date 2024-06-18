@@ -35,9 +35,7 @@ const types: NamedTicketType[] = [
     { name: 'Исправление ошибки', value: TicketType.Fix }
 ]
 
-/**
- * Теги задачи
- */
+/**Теги задачи*/
 export const Labels = memo<Props>(({
     data
 }) => {

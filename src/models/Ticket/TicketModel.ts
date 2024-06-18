@@ -12,7 +12,7 @@ export type TicketModel = {
     /**Название*/
     name: string
     /**Дата создания*/
-    date: Date
+    creationDate: Date
     /**Данные создателя*/
     creator: TicketUserModel
     /**Данные исполнителя*/

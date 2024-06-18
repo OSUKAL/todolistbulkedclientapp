@@ -7,9 +7,7 @@ type Props = {
     showHeader?: boolean
 }
 
-/**
- * База страницы
- */
+/**База страницы*/
 export const BasePage = memo<PropsWithChildren<Props>>(({
     children,
     showHeader = true

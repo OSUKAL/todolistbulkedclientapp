@@ -25,9 +25,7 @@ type Props = {
     data: UserModel
 }
 
-/**
- * Форма изменения пользователя
- */
+/**Форма изменения пользователя*/
 export const EditUserForm = memo<Props>(({
     data
 }) => {
@@ -36,12 +34,12 @@ export const EditUserForm = memo<Props>(({
 
     /**Обработка установки значения текущего имени пользователя в поле для ввода*/
     const handleSetUsernameInitValue = useCallback(() => {
-        if (usernameRef.current === null)
+        if (usernameRef.current!.value === null)
             return
 
-        usernameRef.current.value = data.username
+        usernameRef.current!.value = data.username
 
-    }, [usernameRef])
+    }, [usernameRef, data])
     
     useEffect(() => {
         handleSetUsernameInitValue()
@@ -50,20 +48,20 @@ export const EditUserForm = memo<Props>(({
     }, [handleSetUsernameInitValue])
     
     /**Обработка выбора роли*/
-    const handleRoleSelect = (value: UserRole) => {
+    const handleRoleSelect = useCallback((value: UserRole) => {
         setRole(value)
-    }
+    }, [setRole])
     
     /**Обработка нажатия на кнопку подтверждения изменений*/
     const handleConfirmClick = useCallback(() => {
-        if(usernameRef.current === null || usernameRef.current.value === ''){
+        if(usernameRef.current!.value === ''){
             console.log('Введите имя пользователя')
             return
         }
         
         const userData: EditUserModel = {
             id: data.id,
-            username: usernameRef.current.value,
+            username: usernameRef.current!.value,
             role: role
         }
         

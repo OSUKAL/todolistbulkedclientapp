@@ -8,9 +8,7 @@ type Props = {
     title: string
 }
 
-/**
- * Кнопка
- */
+/**Кнопка*/
 export const Button = memo<Props>(({
     title,
     onClick

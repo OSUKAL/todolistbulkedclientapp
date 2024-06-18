@@ -10,9 +10,7 @@ type Props = {
     data: TicketModel
 }
 
-/**
- * Модальное окно редактирования задачи
- */
+/**Модальное окно редактирования задачи*/
 export const EditTicketModal = memo<Props>(({
     data,
     closeModal

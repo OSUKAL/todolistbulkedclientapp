@@ -8,26 +8,27 @@ type Props = {
     isLoggedIn: boolean
 }
 
-/**
- * Шапка экрана
- */
+/**Шапка страницы*/
 export const Header = memo<Props>(({
-    isLoggedIn = false
+    isLoggedIn = true
 }) => {
-    const navigateTo = useNavigate()
+    const navigate = useNavigate()
     
-    const handleAuthClick = useCallback(() => {
-        navigateTo('/auth')
-    }, [navigateTo])
-    const handleMaihClick = useCallback(() => {
-        navigateTo('/main')
-    }, [navigateTo])
-    const handleTicketClick = useCallback(() => {
-        navigateTo('/task')
-    }, [navigateTo])
+    /**Обработка нажания на кнопку авторизации*/
+    const handleAuthClick = useCallback(() => navigate('/auth'), [navigate])
+
+    /**Обработка нажания на кнопку главная*/
+    const handleMaihClick = useCallback(() => navigate('/main'), [navigate])
+
+    /**Обработка нажания на кнопку задачи*/
+    const handleTicketClick = useCallback(() => navigate('/task'), [navigate])
+
+    /**Обработка нажатия на кнопку выхода*/
     const handleLogoutClick = useCallback(() => {
-        navigateTo('/auth')
-    }, [navigateTo])
+        navigate('/auth')
+        
+        //Метод деавторизации
+    }, [navigate])
     
     return (
         <div className={styles.header}>

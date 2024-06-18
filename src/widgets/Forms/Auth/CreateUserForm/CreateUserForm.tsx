@@ -19,9 +19,7 @@ const defaultRole: NamedUserRole = {
     name: 'Укажите роль пользователя', value: UserRole.Unknown
 }
 
-/**
- * Форма создания пользователя
- */
+/**Форма создания пользователя*/
 export const CreateUserForm = memo(() => {
     const [role, setRole] = useState(UserRole.Unknown)
     const usernameRef = useRef<HTMLInputElement>(null)
@@ -37,19 +35,19 @@ export const CreateUserForm = memo(() => {
     
     /**Обработка нажатия на кнопку создания пользователя*/
     const handleCreateClick = useCallback(() => {
-        if(usernameRef.current === null || usernameRef.current.value === ''){
+        if(usernameRef.current!.value === ''){
             console.log('Роль не указана')
             return
         }
-        if(passwordRef.current === null || passwordRef.current.value === ''){
+        if(passwordRef.current!.value === ''){
             console.log('Создайте пароль')
             return
         }
-        if(repeatPasswordRef.current === null || repeatPasswordRef.current.value === ''){
+        if(repeatPasswordRef.current!.value === ''){
             console.log('Повторите пароль')
             return
         }
-        if(passwordRef.current.value !== repeatPasswordRef.current.value){
+        if(passwordRef.current!.value !== repeatPasswordRef.current!.value){
             console.log('Пароли не совпадают')
             return
         }
@@ -59,8 +57,8 @@ export const CreateUserForm = memo(() => {
         }
         
         const userData: CreateUserModel = {
-            username: usernameRef.current.value,
-            password: passwordRef.current.value,
+            username: usernameRef.current!.value,
+            password: passwordRef.current!.value,
             role: role
         }
         

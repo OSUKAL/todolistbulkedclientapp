@@ -6,9 +6,7 @@ import { TicketState } from '../../Enums/TicketState.ts'
 import { TicketType } from '../../Enums/TicketType.ts'
 import { TicketPriority } from '../../Enums/TicketPriority.ts'
 
-/**
- * Страница списка задач
- */
+/**Страница списка задач*/
 export const MainPage = memo(() => {
     const tickets: TicketModel[] = [
         {
@@ -23,7 +21,7 @@ export const MainPage = memo(() => {
                 id: 'XxX_BlackKamaro_XxX',
                 username: 'XxX_BlackKamaro_XxX'
             },
-            date: new Date(),
+            creationDate: new Date(),
             description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
             state: TicketState.InProgress,
             type: TicketType.Development,
@@ -41,7 +39,7 @@ export const MainPage = memo(() => {
                 id: 'XxX_BlackKamaro_XxX',
                 username: 'Antos'
             },
-            date: new Date(),
+            creationDate: new Date(),
             description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
             state: TicketState.InProgress,
             type: TicketType.Development,
@@ -59,7 +57,7 @@ export const MainPage = memo(() => {
                 id: 'XxX_BlackKamaro_XxX',
                 username: 'ZUVUYER'
             },
-            date: new Date(),
+            creationDate: new Date(),
             description: 'Верстаем экран задачи с функционалом изменения исполнителя, состояния, типа, приоритета и описания.',
             state: TicketState.InProgress,
             type: TicketType.Development,
@@ -69,9 +67,7 @@ export const MainPage = memo(() => {
 
     return (
         <BasePage>
-            <List 
-                data={tickets}
-            />
+            <List data={tickets}/>
         </BasePage>
     )
 })

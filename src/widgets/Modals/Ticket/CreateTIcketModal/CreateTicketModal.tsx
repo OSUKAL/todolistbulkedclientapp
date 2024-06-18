@@ -7,9 +7,7 @@ type Props = {
     closeModal: () => void
 }
 
-/**
- * Модальное окно создания задачи
- */
+/**Модальное окно создания задачи*/
 export const CreateTicketModal = memo<Props>(({
     closeModal
 }) => {

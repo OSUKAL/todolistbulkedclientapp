@@ -4,9 +4,7 @@ import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
 import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 import type { LoginModel } from '../../../../models/Auth/LoginModel.ts'
 
-/**
- * Форма авторизации
- */
+/**Форма авторизации*/
 export const LoginForm = memo(() => {
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)

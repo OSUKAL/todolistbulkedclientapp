@@ -9,9 +9,7 @@ type Props = {
     isInModal?: boolean
 }
 
-/**
- * Базовый компонент формы
- */
+/**Базовый компонент формы*/
 export const FormBase = memo<PropsWithChildren<Props>>(({
     isInModal = false,
     title,

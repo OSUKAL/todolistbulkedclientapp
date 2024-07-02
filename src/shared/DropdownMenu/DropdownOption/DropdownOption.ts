@@ -1,5 +1,5 @@
 ﻿/**Вариант выбора выпадающего списка*/
-export type SelectOption<T> = {
+export type DropdownOption<T> = {
     /**Название*/
     name: string
     /**Значение*/

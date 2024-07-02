@@ -11,7 +11,7 @@ export type EditTicketModel = {
     /**Тип*/
     type: TicketType,
     /**Идентификатор исполнителя*/
-    performerId: string,
+    performerId?: string,
     /**Состояние*/
     state: TicketState,
     /**Приоритет*/

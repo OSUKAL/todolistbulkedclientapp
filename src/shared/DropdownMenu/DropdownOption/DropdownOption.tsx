@@ -1,10 +1,10 @@
 ﻿import { memo, useCallback } from 'react'
 import styles from './CustomOption.module.scss'
-import { SelectOption } from './SelectOption.ts'
+import {DropdownOption} from './DropdownOption.ts'
 
 type Props<T> = {
     /**Вариант выбора*/
-    option: SelectOption<T>
+    option: DropdownOption<T>
     /**Обработка нажатия*/
     onClick: (value: T) => void
 }

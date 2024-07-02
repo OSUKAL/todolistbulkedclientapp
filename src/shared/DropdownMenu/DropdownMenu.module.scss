@@ -1,0 +1,20 @@
+﻿.dropdown{
+  display: block;
+  width: 102%;
+  
+  background: whitesmoke;
+  border: 2px rgb(77, 84, 197) solid;
+
+  border-radius: 1rem;
+
+  list-style-type: none;
+
+  overflow: hidden;
+
+  transform: translateY(5px);
+  
+  position: absolute;
+  left: -0.2rem;
+  right: -0.2rem;
+  z-index: 10;
+}

@@ -1,14 +1,14 @@
-﻿import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+﻿import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
-import { SelectOption } from './CustomOption/SelectOption.ts'
-import { Option } from './CustomOption/CustomOption.tsx'
-
+import { DropdownOption } from '../DropdownMenu/DropdownOption/DropdownOption.ts'
+import { Option } from '../DropdownMenu/DropdownOption/DropdownOption.tsx'
+import { Dropdown } from '../DropdownMenu/DropdownMenu.tsx'
 
 type Props<T> = {
     /**Выбранный вариант*/
-    selected: SelectOption<T>
+    selected: DropdownOption<T>
     /**Варианты выбора*/
-    options: SelectOption<T>[]
+    options: DropdownOption<T>[]
     /**Обработка нажатия*/
     onClick: (value: T) => void
 }
@@ -43,11 +43,6 @@ function SelectGeneric<T extends number>({
         onClick(value)
     }, [onClick, setIsOpen])
 
-    /**Обработка нажатия на выпадающий список*/
-    const handleOptionsClick = useCallback((event: React.MouseEvent<HTMLUListElement>) => {
-        event.stopPropagation()
-    }, [])
-
     /**Обработка открытия выпадающего списка*/
     const handlePlaceHolderClick = useCallback(() => {
         setIsOpen((prev) => !prev)
@@ -68,18 +63,15 @@ function SelectGeneric<T extends number>({
                 {selected.name}
             </div>
             {isOpen && (
-                <ul
-                    className={styles.options}
-                    onClick={handleOptionsClick}
-                >
+                <Dropdown>
                     {options.map((option) => (
-                        <Option
+                        <Option<T>
                             key={option.value}
                             option={option}
                             onClick={handleOptionClick}
                         />
                     ))}
-                </ul>
+                </Dropdown>
             )}
         </div>
     )

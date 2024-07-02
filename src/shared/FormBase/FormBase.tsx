@@ -7,11 +7,14 @@ type Props = {
     title: string
     /**Находится ли в модальном окне*/
     isInModal?: boolean
+    /**Обработка закрытия модального окна*/
+    closeModal?: () => void
 }
 
 /**Базовый компонент формы*/
 export const FormBase = memo<PropsWithChildren<Props>>(({
     isInModal = false,
+    closeModal,
     title,
     children
 }) => {
@@ -21,7 +24,14 @@ export const FormBase = memo<PropsWithChildren<Props>>(({
         <div
             className={isInModal ? modalStyles : styles.form}
         >
-            <h2 className={styles.header}>{title}</h2>
+            <h2 className={styles.header}>
+                {title}
+
+                {isInModal && (
+                    <div onClick={closeModal} className={styles.close}>+</div>
+                )}
+            </h2>
+            
             {children}
         </div>
     )

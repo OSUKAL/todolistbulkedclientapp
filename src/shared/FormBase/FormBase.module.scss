@@ -19,6 +19,27 @@
     
     .header{
       margin-bottom: 1rem;
+
+      position: relative;
+      
+      .close{
+        display: inline-block;
+        
+        font-weight: normal;
+        
+        cursor: pointer;
+
+        transform: scale(2) rotateZ(45deg);
+        transition: color .1s linear;
+        
+        position: absolute;
+        right: 0;
+        top: 0;
+        
+        &:hover{
+          color: #595dd2;
+        }
+      }
     }
   }
   

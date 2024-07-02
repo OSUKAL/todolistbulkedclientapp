@@ -12,9 +12,9 @@ import { TicketType } from '../../../Enums/TicketType.ts'
 import type { NamedTicketPriority } from '../../../Enums/NamedEnums/NamedTicketPriority.ts'
 import type { NamedTicketState } from '../../../Enums/NamedEnums/NamedTicketState.ts'
 import type { NamedTicketType } from '../../../Enums/NamedEnums/NamedTicketType.ts'
-import { CreateTicketModel } from '../../../models/Ticket/CreateTicketModel.ts'
+import type { CreateTicketModel } from '../../../models/Ticket/CreateTicketModel.ts'
+import type { EditTicketModel } from '../../../models/Ticket/EditTicketModel.ts'
 import { toast } from 'sonner'
-import { EditTicketModel } from '../../../models/Ticket/EditTicketModel.ts'
 
 const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -166,6 +166,7 @@ export const TicketForm = memo<Props>(({
         <FormBase
             isInModal={true}
             title={formHeader}
+            closeModal={onClick}
         >
             <div className={styles.columns}>
                 <div className={styles.textarea}>

@@ -7,6 +7,7 @@ import type { UserModel } from '../../../../models/User/UserModel.ts'
 import { UserRole } from '../../../../Enums/UserRole.ts'
 import type { NamedUserRole } from '../../../../Enums/NamedEnums/NamedUserRole.ts'
 import type { EditUserModel } from '../../../../models/User/EditUserModel.ts'
+import { toast } from 'sonner'
 
 const roles: NamedUserRole[] = [
     {name: 'Администратор', value: UserRole.Admin},
@@ -55,8 +56,11 @@ export const EditUserForm = memo<Props>(({
     /**Обработка нажатия на кнопку подтверждения изменений*/
     const handleConfirmClick = useCallback(() => {
         if(usernameRef.current!.value === ''){
-            console.log('Введите имя пользователя')
+            toast.warning('Введите имя пользователя')
             return
+        }
+        if(role === defaultRole.value){
+            toast.warning('Укажите роль')
         }
         
         const userData: EditUserModel = {

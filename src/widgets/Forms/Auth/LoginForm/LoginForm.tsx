@@ -3,6 +3,7 @@ import { Input } from '../../../../shared/CustomInput/CustomInput.tsx'
 import { Button } from '../../../../shared/CustomButton/CustomButton.tsx'
 import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 import type { LoginModel } from '../../../../models/Auth/LoginModel.ts'
+import { toast } from 'sonner'
 
 /**Форма авторизации*/
 export const LoginForm = memo(() => {
@@ -12,11 +13,11 @@ export const LoginForm = memo(() => {
     /**Обработка нажатия на кнопку создания пользователя*/
     const handleLoginClick = useCallback(() => {
         if(usernameRef.current === null || usernameRef.current.value === ''){
-            console.log('Указано неверное имя пользователя')
+            toast.error('Указано неверное имя пользователя')
             return
         }
         if(passwordRef.current === null || passwordRef.current.value === ''){
-            console.log('Указан неверный пароль')
+            toast.error('Указан неверный пароль')
             return
         }
         

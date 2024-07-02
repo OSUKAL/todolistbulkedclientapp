@@ -6,13 +6,14 @@ import { FormBase } from '../../../../shared/FormBase/FormBase.tsx'
 import { UserRole } from '../../../../Enums/UserRole.ts'
 import type { NamedUserRole } from '../../../../Enums/NamedEnums/NamedUserRole.ts'
 import type { CreateUserModel } from '../../../../models/User/CreateUserModel.ts'
+import { toast } from 'sonner'
 
 const roles: NamedUserRole[] = [
-    {name: 'Администратор', value: UserRole.Admin},
-    {name: 'Руководитель команды', value: UserRole.TeamLeader},
-    {name: 'Разработчик', value: UserRole.Developer},
-    {name: 'Тестировщик', value: UserRole.Tester},
-    {name: 'Аналитик', value: UserRole.Analyst}
+    { name: 'Администратор', value: UserRole.Admin },
+    { name: 'Руководитель команды', value: UserRole.TeamLeader },
+    { name: 'Разработчик', value: UserRole.Developer },
+    { name: 'Тестировщик', value: UserRole.Tester },
+    { name: 'Аналитик', value: UserRole.Analyst }
 ]
 
 const defaultRole: NamedUserRole = {
@@ -25,50 +26,50 @@ export const CreateUserForm = memo(() => {
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const repeatPasswordRef = useRef<HTMLInputElement>(null)
-    
+
     const selectedRole = roles.find((item) => item.value === role) ?? defaultRole
 
     /**Обработка выбора роли*/
     const handleRoleSelect = useCallback((value: UserRole) => {
         setRole(value)
     }, [setRole])
-    
+
     /**Обработка нажатия на кнопку создания пользователя*/
     const handleCreateClick = useCallback(() => {
-        if(usernameRef.current!.value === ''){
-            console.log('Роль не указана')
+        if (usernameRef.current!.value === '') {
+            toast.warning('Введите имя пользователя')
             return
         }
-        if(passwordRef.current!.value === ''){
-            console.log('Создайте пароль')
+        if (passwordRef.current!.value === '') {
+            toast.warning('Введите пароль')
             return
         }
-        if(repeatPasswordRef.current!.value === ''){
-            console.log('Повторите пароль')
+        if (repeatPasswordRef.current!.value === '') {
+            toast.warning('Повторите пароль')
             return
         }
-        if(passwordRef.current!.value !== repeatPasswordRef.current!.value){
-            console.log('Пароли не совпадают')
+        if (passwordRef.current!.value !== repeatPasswordRef.current!.value) {
+            toast.warning('Пароли должны совпадать')
             return
         }
-        if(role === defaultRole.value){
-            console.log('Роль не указана')
+        if (role === defaultRole.value) {
+            toast.warning('Укажите роль')
             return
         }
-        
+
         const userData: CreateUserModel = {
             username: usernameRef.current!.value,
             password: passwordRef.current!.value,
             role: role
         }
-        
+
         console.log(userData) //Передача объекта в запрос
-        
+
     }, [role, usernameRef, passwordRef, repeatPasswordRef])
-    
-    return(
+
+    return (
         <FormBase title={'Создание пользователя'}>
-            <Input 
+            <Input
                 inputRef={usernameRef}
                 type={'text'}
                 placeholder={'Имя пользователя'}
@@ -84,13 +85,13 @@ export const CreateUserForm = memo(() => {
                 placeholder={'Повторите пароль'}
             />
             <Select<UserRole>
-                selected={selectedRole} 
+                selected={selectedRole}
                 options={roles}
                 onClick={handleRoleSelect}
             />
             <Button
                 title={'Создать'}
-                onClick={handleCreateClick} 
+                onClick={handleCreateClick}
             />
         </FormBase>
     )

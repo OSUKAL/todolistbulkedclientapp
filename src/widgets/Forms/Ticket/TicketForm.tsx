@@ -13,6 +13,8 @@ import type { NamedTicketPriority } from '../../../Enums/NamedEnums/NamedTicketP
 import type { NamedTicketState } from '../../../Enums/NamedEnums/NamedTicketState.ts'
 import type { NamedTicketType } from '../../../Enums/NamedEnums/NamedTicketType.ts'
 import { CreateTicketModel } from '../../../models/Ticket/CreateTicketModel.ts'
+import { toast } from 'sonner'
+import { EditTicketModel } from '../../../models/Ticket/EditTicketModel.ts'
 
 const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -75,53 +77,82 @@ export const TicketForm = memo<Props>(({
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
-        if(!data)
-            return 
-        
+        if (!data)
+            return
+
         nameRef.current!.value = data.name
         performerRef.current!.value = data.performer.username
         descriptionRef.current!.value = data.description
-        
-        return () => {}
+
+        return () => {
+        }
     }, [descriptionRef, performerRef, nameRef, data])
-    
+
     /**Обработка нажатия на кнопку формы*/
     const handleButtonClick = useCallback(() => {
-        if(nameRef.current!.value === ''){
-            console.log('Название задачи не указано')
+        if (nameRef.current!.value === '') {
+            toast.warning('Название задачи не указано')
             return
         }
-        if(performerRef.current!.value === ''){
-            console.log('Исполнитель задачи не назначен')
+        if (performerRef.current!.value === '') {
+            toast.warning('Исполнитель задачи не назначен')
             return
         }
-        if(descriptionRef.current!.value === ''){
-            console.log('Отсутствует описание задачи')
+        if (descriptionRef.current!.value === '') {
+            toast.warning('Отсутствует описание задачи')
             return
         }
-        
-        const ticketData: CreateTicketModel = {
-            name: nameRef.current!.value,
-            type: type,
-            priority: priority,
-            description: descriptionRef.current!.value
+        if (formType === 'edit' && state === defaultState.value) {
+            toast.warning('Состояние задачи не указано')
+            return
         }
-        
-        onClick()
-        console.log(ticketData)
-        
-    }, [onClick, type, priority, nameRef, performerRef, descriptionRef])
+        if (type === defaultType.value) {
+            toast.warning('Тип задачи не указан')
+            return
+        }
+        if (priority === defaultPriority.value) {
+            toast.warning('Приоритет задачи не указан')
+            return
+        }
+
+        if (formType === 'create') {
+            const ticketData: CreateTicketModel = {
+                name: nameRef.current!.value,
+                type: type,
+                priority: priority,
+                description: descriptionRef.current!.value
+            }
+
+            console.log(ticketData) //Передача объекта в метод
+            onClick()
+        }
+
+        if (formType === 'edit') {
+            const ticketData: EditTicketModel = {
+                id: data!.id,
+                name: nameRef.current!.value,
+                type: type,
+                state: state,
+                priority: priority,
+                description: descriptionRef.current!.value
+            }
+
+            console.log(ticketData) //Передача объекта в метод
+            onClick()
+        }
+
+    }, [data, onClick, type, formType, priority, nameRef, performerRef, descriptionRef])
 
     /**Обработка выбора приоритета задачи*/
     const handlePrioritySelect = useCallback((value: TicketPriority) => {
         setPriority(value)
     }, [setPriority])
-    
+
     /**Обработка выбора состояния задачи*/
     const handleStateSelect = useCallback((value: TicketState) => {
         setState(value)
     }, [setState])
-    
+
     /**Обработка выбора типа задачи*/
     const handleTypeSelect = useCallback((value: TicketType) => {
         setType(value)
@@ -138,18 +169,18 @@ export const TicketForm = memo<Props>(({
         >
             <div className={styles.columns}>
                 <div className={styles.textarea}>
-                    <Textarea 
+                    <Textarea
                         textareaRef={descriptionRef}
                         placeholder={'Укажите описание задачи'}
                     />
                 </div>
                 <div className={styles.selects}>
-                    <Input 
+                    <Input
                         inputRef={nameRef}
                         placeholder={'Укажите название задачи'}
                         type={'text'}
                     />
-                    <Input 
+                    <Input
                         inputRef={performerRef}
                         placeholder={'Укажите исполнителя'}
                         type={'text'}

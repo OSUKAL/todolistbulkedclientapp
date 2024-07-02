@@ -1,5 +1,5 @@
 ﻿import { memo, useCallback } from 'react'
-import styles from './CustomOption.module.scss'
+import styles from './DropdownOption.module.scss'
 import {DropdownOption} from './DropdownOption.ts'
 
 type Props<T> = {

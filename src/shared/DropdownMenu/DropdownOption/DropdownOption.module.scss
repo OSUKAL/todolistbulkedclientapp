@@ -1,0 +1,12 @@
+.option{
+  padding: .2rem;
+  
+  font-weight: normal;
+  
+  transition: background-color .1s linear, color .1s linear;
+  
+  &:hover{
+    color: white;
+    background: rgb(77, 84, 197);
+  }
+}

@@ -1,0 +1,17 @@
+﻿.textarea{
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  
+  padding: .5rem 1rem;
+  
+  font: inherit;
+  font-size: 1.7rem;
+  letter-spacing: .05rem;
+  
+  border: 2px #646cff solid;
+  border-radius: 1rem;
+
+  overflow: auto;
+  resize: none;
+}

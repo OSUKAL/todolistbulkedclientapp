@@ -1,0 +1,47 @@
+﻿.header{
+  margin-bottom: 2rem;
+  
+  background: rgb(100, 108, 255);
+}
+
+.header__inner{
+  display: flex;
+  justify-content: space-between;
+
+  padding: 2rem 0;
+}
+
+.logo{
+  font-weight: bold;
+  font-size: 3rem;
+  color: lavender;
+  
+  transition: color .1s linear;
+  
+  &:hover{
+    color: white;
+  }
+}
+
+.nav{
+  display: flex;
+  align-items: center;
+  
+  .link{
+    margin-right: 4rem;
+    
+    font-weight: 500;
+    color: white;
+    
+    transition: color .2s linear;
+    cursor: pointer;
+    
+    &:last-child{
+      margin-right: 0;
+    }
+    
+    &:hover{
+      color: lightblue;
+    }
+  }
+}

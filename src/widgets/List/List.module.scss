@@ -1,0 +1,51 @@
+﻿.base{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 2rem;
+  
+  margin: 0 1.5rem;
+  
+  .header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 .5rem;
+    
+    .title{
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  }
+  
+  .search{
+    display: flex;
+    margin: 0 .5rem;
+    
+    .item{
+      flex: 1 1 20%;
+      margin-right: 2rem;
+    }
+  }
+  
+  .scroll{
+    flex-wrap: wrap;
+    flex-grow: 1;
+    
+    height: .1rem;
+    margin-bottom: 1rem;
+
+    border-bottom: 1px lightgray solid;
+    border-top: 1px lightgray solid;
+    
+    overflow-y: scroll;
+
+    .list{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+}

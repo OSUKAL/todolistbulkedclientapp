@@ -1,0 +1,27 @@
+.input{
+  width: 100%;
+  padding: 1rem;
+
+  font-family: inherit;
+  color: #213547;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: .5px;
+  text-align: inherit;
+
+  background: transparent;
+  
+  border: none;
+  border-bottom: 2px #646cff solid;
+  
+  transition: border-bottom .1s linear;
+  
+  &::placeholder{
+    font-weight: normal;
+  }
+  
+  &:focus{
+    outline: none;
+    border-color: rgb(51, 56, 133);
+  }
+}

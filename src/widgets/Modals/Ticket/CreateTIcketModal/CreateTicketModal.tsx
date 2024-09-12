@@ -15,7 +15,7 @@ export const CreateTicketModal = memo<Props>(({
         <ModalBase closeModal={closeModal}>
             <TicketForm
                 formType={'create'}
-                onClick={closeModal}
+                closeForm={closeModal}
                 formHeader={'Добавление задачи'}
                 buttonName={'Создать'}
             />

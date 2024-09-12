@@ -2,7 +2,9 @@
 import styles from './DropdownMenu.module.scss'
 
 type Props = {
-    visibleOptions: number
+    /**Количество видимых опций*/
+    visibleOptions?: number
+    /**Общее количесвто опций*/
     totalOptions: number
 }
 
@@ -17,7 +19,7 @@ export const Dropdown = memo<PropsWithChildren<Props>>(({
         event.stopPropagation()
     }, [])
     
-    const dropdownHeight = visibleOptions < totalOptions ? `${visibleOptions * 32.8 + 16.4}px` : 'max-content'
+    const dropdownHeight = visibleOptions && visibleOptions < totalOptions ? `${visibleOptions * 32.8 + 16.4}px` : 'max-content'
     
     return (
         <ul

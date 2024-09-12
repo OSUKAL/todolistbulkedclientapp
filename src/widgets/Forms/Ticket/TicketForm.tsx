@@ -15,6 +15,7 @@ import type { NamedTicketType } from '../../../Enums/NamedEnums/NamedTicketType.
 import type { CreateTicketModel } from '../../../models/Ticket/CreateTicketModel.ts'
 import type { EditTicketModel } from '../../../models/Ticket/EditTicketModel.ts'
 import { toast } from 'sonner'
+import { Search } from '../../../shared/SearchInput/SearchInput.tsx'
 
 const priorities: NamedTicketPriority[] = [
     { name: 'Наивысший', value: TicketPriority.Top },
@@ -49,8 +50,8 @@ const defaultPriority: NamedTicketPriority = {
 }
 
 type Props = {
-    /**Обработка нажатия*/
-    onClick: () => void
+    /**Обработка закрытия формы*/
+    closeForm: () => void
     /**Данные задачи*/
     data?: TicketModel
     /**Заголовок формы*/
@@ -66,7 +67,7 @@ export const TicketForm = memo<Props>(({
     formType,
     buttonName,
     data,
-    onClick,
+    closeForm,
     formHeader
 }) => {
     const [priority, setPriority] = useState(data?.priority ?? TicketPriority.Unknown)
@@ -75,7 +76,7 @@ export const TicketForm = memo<Props>(({
     const nameRef = useRef<HTMLInputElement>(null)
     const performerRef = useRef<HTMLInputElement>(null)
     const descriptionRef = useRef<HTMLTextAreaElement>(null)
-
+    
     useEffect(() => {
         if (!data)
             return
@@ -124,7 +125,7 @@ export const TicketForm = memo<Props>(({
             }
 
             console.log(ticketData) //Передача объекта в метод
-            onClick()
+            closeForm()
         }
 
         if (formType === 'edit') {
@@ -138,10 +139,10 @@ export const TicketForm = memo<Props>(({
             }
 
             console.log(ticketData) //Передача объекта в метод
-            onClick()
+            closeForm()
         }
 
-    }, [data, onClick, type, formType, priority, nameRef, performerRef, descriptionRef])
+    }, [data, closeForm, type, formType, priority, nameRef, performerRef, descriptionRef])
 
     /**Обработка выбора приоритета задачи*/
     const handlePrioritySelect = useCallback((value: TicketPriority) => {
@@ -166,7 +167,7 @@ export const TicketForm = memo<Props>(({
         <FormBase
             isInModal={true}
             title={formHeader}
-            closeModal={onClick}
+            closeModal={closeForm}
         >
             <div className={styles.columns}>
                 <div className={styles.textarea}>
@@ -181,10 +182,9 @@ export const TicketForm = memo<Props>(({
                         placeholder={'Укажите название задачи'}
                         type={'text'}
                     />
-                    <Input
-                        inputRef={performerRef}
-                        placeholder={'Укажите исполнителя'}
-                        type={'text'}
+                    <Search 
+                        onClick={()=>{}} 
+                        placeholder={'Укажите исполнителя задачи'}
                     />
                     {formType === 'edit' && (
                         <Select<TicketState>

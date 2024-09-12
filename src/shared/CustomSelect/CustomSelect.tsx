@@ -1,6 +1,6 @@
 ﻿import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
-import { DropdownOption } from '../DropdownMenu/DropdownOption/DropdownOption.ts'
+import type { DropdownOption } from '../DropdownMenu/DropdownOption/DropdownOption.ts'
 import { Option } from '../DropdownMenu/DropdownOption/DropdownOption.tsx'
 import { Dropdown } from '../DropdownMenu/DropdownMenu.tsx'
 
@@ -11,11 +11,14 @@ type Props<T> = {
     options: DropdownOption<T>[]
     /**Обработка нажатия*/
     onClick: (value: T) => void
+    /**Количество видимых элементов выпадающего меню*/
+    visibleOptions?: number
 }
 
-/**Выпадающий список*/
+/**Компонент выбора варианта выпадающего списка*/
 function SelectGeneric<T extends number>({
     selected,
+    visibleOptions,
     options,
     onClick
 }: Props<T>) {
@@ -47,7 +50,7 @@ function SelectGeneric<T extends number>({
     const handlePlaceHolderClick = useCallback(() => {
         setIsOpen((prev) => !prev)
     },[setIsOpen])
-
+    
     return (
         <div
             className={styles.select}
@@ -63,7 +66,10 @@ function SelectGeneric<T extends number>({
                 {selected.name}
             </div>
             {isOpen && (
-                <Dropdown>
+                <Dropdown 
+                    visibleOptions={visibleOptions}
+                    totalOptions={options.length}
+                >
                     {options.map((option) => (
                         <Option<T>
                             key={option.value}

@@ -10,7 +10,7 @@ type Props<T> = {
 }
 
 /**Элемент выпадающего списка*/
-function OptionGeneric<T extends number>({
+function OptionGeneric<T extends string | number>({
     option,
     onClick
 }: Props<T>) {
